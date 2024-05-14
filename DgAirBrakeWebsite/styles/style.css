@@ -4,13 +4,17 @@ body {
     background-color: #f2f2f2;
 }
 
+
+
+
+
 /* Header and top navigation */
 
 header {
-    background-color: #096fd4; /* Dark background color */
-    color: #fff; /* White text color */
-    padding: 20px 0; /* Add some padding for breathing space */
-    text-align: center; /* Center-align the content */
+    background-color: #096fd4;  
+    color: #fff;  
+    padding: 20px 0;  
+    text-align: center;  
 }
 
 .company-name {
@@ -20,10 +24,10 @@ header {
 .nav-bar {
     text-align: center;
     width: 100%;
-    padding: 10px 0; /* Add some padding for breathing space */
+    padding: 10px 0;  
     position: sticky;
     top: 0;
-    background-color: #e6e6e6; /* Light background color */
+    background-color: #e6e6e6;  
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -57,6 +61,8 @@ nav ul li a:hover {
 .menu-burger {
     display: none;
 }
+
+
 
 
 
@@ -123,64 +129,79 @@ img.displaySlide {
 
 
 
+
+
 /* Sections */
 section {
-    padding: 50px 0; /* Add some padding for breathing space */
+    padding: 50px 0;  
 }
 
-/* Style for ABOUT US */
-#about {
-    background-color: #e5e5e5; /* Light background color */
-}
-
-/* Style for section header */
 .section-header {
-    text-align: center; /* Center-align the text */
+    text-align: center;  
     font-weight: bold;
-    font-size: 2rem; /* Increase font size */
-    color: #096fd4; /* Dark text color */
-    margin-bottom: 30px; /* Add some space between header and content */
-    text-transform: uppercase; /* Convert text to uppercase */
+    font-size: 2rem;  
+    color: #096fd4;  
+    margin-bottom: 30px;  
+    text-transform: uppercase;  
 }
 
-/* Style for section content */
+
+
+
+
+/* ABOUT US */
+
+#about {
+    background-color: #e5e5e5;  
+}
+
 #about .section-content {
-    max-width: 800px; /* Limit content width for better readability */
-    margin: 0 auto; /* Center content horizontally */
-    padding: 0 20px; /* Add some padding to the sides */
-    line-height: 1.6; /* Increase line height for better readability */
-    color: #666; /* Slightly lighter text color */
+    max-width: 800px;  
+    margin: 0 auto;  
+    padding: 0 20px;  
+    line-height: 1.6;  
+    color: #666;  
 }
 
-/* Style for paragraphs within section content */
 #about .section-content p {
-    margin-bottom: 20px; /* Add some space between paragraphs */
+    margin-bottom: 20px;  
 }
 
-/* Style for SERVICES */
+
+
+
+
+/* SERVICES */
 #services {
-    background-color: #c9c9c9; /* Light background color */
+    background-color: #c9c9c9;  
     padding: 50px 0;
 }
 
 #services .section-content {
-    max-width: 800px; /* Limit content width for better readability */
-    margin: 0 auto; /* Center content horizontally */
-    padding: 0 20px; /* Add some padding to the sides */
-    line-height: 1.6; /* Increase line height for better readability */
-    color: #535252; /* Slightly lighter text color */
-    text-align: left; /* Left-align the content */
+    max-width: 800px;  
+    margin: 0 auto;  
+    padding: 0 20px;  
+    line-height: 1.6;  
+    color: #535252;  
+    text-align: left;  
 }
 
-/* Style for service subheadings */
 #services .service-subheading {
-    font-size: 1.2rem; /* Increase font size */
-    margin-top: 20px; /* Add some space between subheadings */
-    color: #333; /* Dark text color */
+    font-weight: bold;
+    font-size: 1.2rem;  
+    margin-top: 20px;  
+    color: #333;  
+}
+
+#services p {
+    margin-top: 0;
 }
 
 
-/* Gallery section */
+
+
+
+/* GALLERY */
 
 #gallery {
     background-color: #e5e5e5;
@@ -226,28 +247,30 @@ section {
 }
 
 
-/* Style for CONTACT US */
+
+
+
+/* CONTACT US */
 #contact {
-    background-color: #c9c9c9; /* Light background color */
+    background-color: #c9c9c9;  
     padding: 50px 0;
 }
 
 #contact .section-header {
-    text-align: center; /* Center-align the text */
-    font-size: 2rem; /* Increase font size */
-    margin-bottom: 30px; /* Add some space between header and content */
-    text-transform: uppercase; /* Convert text to uppercase */
+    text-align: center;  
+    font-size: 2rem;  
+    margin-bottom: 30px;  
+    text-transform: uppercase;  
 }
 
 #contact .section-content {
-    max-width: 800px; /* Limit content width for better readability */
-    margin: 0 auto; /* Center content horizontally */
-    padding: 0 20px; /* Add some padding to the sides */
-    line-height: 1.6; /* Increase line height for better readability */
-    color: #535252; /* Slightly lighter text color */
+    max-width: 800px;  
+    margin: 0 auto;  
+    padding: 0 20px;  
+    line-height: 1.6;  
+    color: #535252;  
 }
 
-/* Style for contact details */
 .contact-info {
     display: flex;
     justify-content: center;
@@ -260,92 +283,95 @@ section {
 }
 
 .contact-detail h3 {
-    font-size: 1.2rem; /* Increase font size */
-    margin-bottom: 10px; /* Add some space between heading and content */
+    font-size: 1.2rem;  
+    margin-bottom: 10px;  
 }
 
 
 
-/* Style for REVIEWS */
+
+
+/* REVIEWS */
 #reviews {
-    padding: 50px 0; /* Add some padding for breathing space */
-    background-color: #e5e5e5; /* Light background color */
+    padding: 50px 0;  
+    background-color: #e5e5e5;  
 }
 
 #reviews .section-header {
-    text-align: center; /* Center-align the text */
-    font-size: 2rem; /* Increase font size */
-    margin-bottom: 30px; /* Add some space between header and content */
-    text-transform: uppercase; /* Convert text to uppercase */
+    text-align: center;  
+    font-size: 2rem;  
+    margin-bottom: 30px;  
+    text-transform: uppercase;  
 }
 
 #reviews .section-content {
-    max-width: 800px; /* Limit content width for better readability */
-    margin: 0 auto; /* Center content horizontally */
-    padding: 0 20px; /* Add some padding to the sides */
-    line-height: 1.6; /* Increase line height for better readability */
-    color: #666; /* Slightly lighter text color */
+    max-width: 800px;  
+    margin: 0 auto;  
+    padding: 0 20px;  
+    line-height: 1.6;  
+    color: #666;  
 }
 
-/* Style for REVIEWS */
 #reviews {
-    padding: 50px 0; /* Add some padding for breathing space */
-    background-color: #e5e5e5; /* Light background color */
+    padding: 50px 0;  
+    background-color: #e5e5e5;  
 }
 
 #reviews .section-header {
-    text-align: center; /* Center-align the text */
-    font-size: 2rem; /* Increase font size */
-    margin-bottom: 30px; /* Add some space between header and content */
-    text-transform: uppercase; /* Convert text to uppercase */
+    text-align: center;  
+    font-size: 2rem;  
+    margin-bottom: 30px;  
+    text-transform: uppercase;  
 }
 
 #reviews .section-content {
-    max-width: 800px; /* Limit content width for better readability */
-    margin: 0 auto; /* Center content horizontally */
-    padding: 0 20px; /* Add some padding to the sides */
-    line-height: 1.6; /* Increase line height for better readability */
-    color: #666; /* Slightly lighter text color */
+    max-width: 800px;  
+    margin: 0 auto;  
+    padding: 0 20px;  
+    line-height: 1.6;  
+    color: #666;  
 }
 
-/* Style for individual reviews */
 .review {
-    margin-bottom: 30px; /* Add some space between reviews */
+    margin-bottom: 30px;  
 }
 
 .review-header {
-    margin-bottom: 10px; /* Add some space between header and text */
+    margin-bottom: 10px;  
 }
 
 .review-info h3 {
-    margin: 0; /* Remove margin for name */
-    color: #333; /* Dark text color */
+    margin: 0;  
+    color: #333;  
 }
 
 .review-info p {
-    margin: 0; /* Remove margin for star rating */
-    color: #888; /* Lighter text color */
+    margin: 0;  
+    color: #888;  
 }
 
 .review-text {
-    font-style: italic; /* Italicize review text */
+    font-style: italic;  
 }
 
 
-/* Style for footer */
+
+
+
+/* FOOTER */
 footer {
-    background-color: #333; /* Dark background color */
-    color: #fff; /* Light text color */
-    padding: 20px 0; /* Add some padding top and bottom */
-    text-align: center; /* Center-align content */
+    background-color: #333;  
+    color: #fff;  
+    padding: 20px 0;  
+    text-align: center;  
 }
 
 .footer-content {
-    max-width: 800px; /* Limit content width */
-    margin: 0 auto; /* Center content horizontally */
+    max-width: 800px;  
+    margin: 0 auto;  
 }
 
 .footer-content p {
-    margin: 0; /* Remove default margin for paragraphs */
+    margin: 0;  
 }
 
