@@ -7,9 +7,8 @@
         private $expirationDate;
         private $cardType;
 
-        public function __construct($cardID, $cardNumber, $expirationDate, $cardType) {
+        public function __construct($cardNumber, $expirationDate, $cardType) {
 
-            $this->cardID = $cardID;
             $this->cardNumber = $cardNumber;
             $this->expirationDate = $expirationDate;
             $this->cardType = $cardType;

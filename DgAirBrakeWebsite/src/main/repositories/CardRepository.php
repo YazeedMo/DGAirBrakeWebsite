@@ -1,7 +1,7 @@
 <?php
 
-    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
     require_once __DIR__ . '/../../main/model/Card.php';
+    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class CardRpository {
 
@@ -22,12 +22,11 @@
             $result = $this->dbConnection->query($query);
             while ($row = $result->fetch()) {
                 $card = new Card(
-                    $row['CardID'],
                     $row['CardNumber'],
                     $row['ExpirationDate'],
                     $row['CardType']
-                    
                 );
+                $card->setCardID($row['CardID']);
                 
                 $allCards[] = $card;
             }
@@ -36,21 +35,81 @@
 
         }
 
+        public function getCardByID($cardID) {
+
+            $sql = "SELECT * FROM Cards WHERE CardID = :cardId";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'cardId' =>$cardID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $card = new Card(
+                    $row['CardNumber'],
+                    $row['ExpirationDate'],
+                    $row['CardType']
+                );
+                $card->setCardID($row['CardID']);
+
+                return $card;
+
+            }
+
+        }
+
+        public function getCardByCardNumber($cardNumber) {
+
+            $sql = "SELECT * FROM Cards WHERE CardNumber = :cardNumber";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute(['cardNumber' => $cardNumber]);
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $card =  new Card(
+                    $row['CardNumber'],
+                    $row['ExpirationDate'],
+                    $row['CardType']
+                );
+                $card->setCardID($row['CardID']);
+
+                return $card;
+            }
+            
+            return null;
+
+        }
+
         public function createCard($card) {
 
-            $stmt = $this->dbConnection->prepare("INSERT INTO Cards (CardID, CardNumber, ExpirationDate, CardType) VALUES (:cardId, :cardNumber, :expirationDate, :cardType)");
-            return $stmt->execute([
-                'cardId' => $card->getCardID(),
+            $sql = "INSERT INTO Cards (CardNumber, ExpirationDate, CardType) VALUES (:cardNumber, :expirationDate, :cardType)";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            
+            $stmt->execute([
                 'cardNumber' => $card->getCardNumber(),
                 'expirationDate' => $card->getExpirationDate(),
                 'cardType' => $card->getCardType()
             ]);
 
+            if ($stmt->rowCount() > 0) {
+                return $this->getCardByID($this->dbConnection->lastInsertId());
+            }
+            else {
+                return false;
+            }
         }
 
         public function updateCard($card) {
 
-            $stmt = $this->dbConnection->prepare("UPDATE Cards SET CardNumber = :cardNumber, ExpirationDate = :expirationDate, CardType = :cardType WHERE CardID = :cardId");
+            $sql = "UPDATE Cards SET CardNumber = :cardNumber, ExpirationDate = :expirationDate, CardType = :cardType WHERE CardID = :cardId";
+
+            $stmt = $this->dbConnection->prepare($sql);
             return $stmt->execute([
                 'cardId' => $card->getCardID(),
                 'cardNumber' => $card->getCardNumber(),
@@ -63,7 +122,9 @@
 
         public function deleteCard($cardID) {
 
-            $stmt = $this->dbConnection->prepare("DELETE FROM Cards WHERE CardID = :cardId");
+            $sql = "DELETE FROM Cards WHERE CardID = :cardId";
+
+            $stmt = $this->dbConnection->prepare($sql);
             return $stmt->execute([
                 'cardId' => $cardID
             ]);

@@ -1,8 +1,7 @@
 <?php
 
-    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
     require_once __DIR__ . '/../../main/model/CartItem.php';
-
+    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class CartItem {
         
@@ -23,13 +22,12 @@
             $result = $this->dbConnection->query($query);
             while ($row = $result->fetch()) {
                 $cartItem = new CartItem(
-                    $row['CartItemID'],
                     $row['CartID'],
                     $row['ProductID'],
                     $row['Quantity']
-            
                 );
-            
+                $cartItem->setCartItemID($row['CartItemID']);
+
                 $allCartItems[] = $cartItem;
             }
 
@@ -37,20 +35,52 @@
 
         }
 
+        public function getCartItemByID($cartItemID) {
+
+            $sql = "SELECT * FROM * FROM Cartitems WHERE CartItemID = :cartItemId";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'cartItemId' => $cartItemID
+            ]);
+            
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $cartItem = new CartItem(
+                    $row['CartID'],
+                    $row['ProductID'],
+                    $row['Quantity']
+                );
+                $cartItem->setCartItemID($row['CartItemID']);
+
+                return $cartItem;
+
+            }
+
+        }
+
         public function createCartItem($cartItem) {
 
             $sql = "INSERT INTO CartItems
-                    (CartItemID, CartID, ProductID, Quantity)
+                    (CartID, ProductID, Quantity)
                     VALUES
-                    (:cartItemId, :cartId, :productId, :quantity)";
+                    (:cartId, :productId, :quantity)";
 
             $stmt = $this->dbConnection->prepare($sql);
-            return $stmt->execute([
-                'cartItemId' => $cartItem->getCartItemID(),
+            $stmt->execute([
                 'cartId' => $cartItem->getCartID(),
                 'productId' => $cartItem->getProductID(),
                 'quantity' => $cartItem->getQuantity()
             ]);
+
+            if ($stmt->rowCount() > 0) {
+                return $this->getCartItemByID($this->dbConnection->lastInsertId());
+            }
+            else {
+                return false;
+            }
 
         }
 

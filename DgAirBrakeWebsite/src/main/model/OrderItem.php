@@ -8,8 +8,7 @@ class OrderItem {
     private $price;
 
     // Constructor
-    public function __construct($orderItemID, $orderID, $productID, $quantity, $price) {
-        $this->orderItemID = $orderItemID;
+    public function __construct($orderID, $productID, $quantity, $price) {
         $this->orderID = $orderID;
         $this->productID = $productID;
         $this->quantity = $quantity;
@@ -18,44 +17,44 @@ class OrderItem {
 
     // Getters
     public function getOrderItemID() {
-        return $this->OrderItemID;
+        return $this->orderItemID;
     }
 
     public function getOrderID() {
-        return $this->OrderID;
+        return $this->orderID;
     }
 
     public function getProductID() {
-        return $this->ProductID;
+        return $this->productID;
     }
 
     public function getQuantity() {
-        return $this->Quantity;
+        return $this->quantity;
     }
 
     public function getPrice() {
-        return $this->Price;
+        return $this->price;
     }
 
     // Setters
     public function setOrderItemID($OrderItemID) {
-        $this->OrderItemID = $OrderItemID;
+        $this->orderItemID = $OrderItemID;
     }
 
     public function setOrderID($OrderID) {
-        $this->OrderID = $OrderID;
+        $this->orderID = $OrderID;
     }
 
     public function setProductID($ProductID) {
-        $this->ProductID = $ProductID;
+        $this->productID = $ProductID;
     }
 
     public function setQuantity($Quantity) {
-        $this->Quantity = $Quantity;
+        $this->quantity = $Quantity;
     }
 
     public function setPrice($Price) {
-        $this->Price = $Price;
+        $this->price = $Price;
     }
 
     public function jsonSerialize() {

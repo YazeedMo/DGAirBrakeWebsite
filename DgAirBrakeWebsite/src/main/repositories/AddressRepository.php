@@ -1,7 +1,7 @@
 <?php
 
-    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
     require_once __DIR__ . '/../../main/model/Address.php';
+    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class AddressRepository {
 
@@ -22,10 +22,10 @@
 
             while ($row = $result->fetch()) {
                 $address = new Address(
-                    $row['AddressID'],
                     $row['AddressString'],
                     $row['AreaCode']
                 );
+                $address->setAddressID($row['AddressID']);
 
                 $allAddresses[] = $address;
             }
@@ -34,26 +34,60 @@
 
         }
 
+        public function getAddressByID($addressID) {
+
+            $sql = "SELECT * FROM Addresses WHERE AddressID = :addressId";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'addressId' => $addressID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $address = new Address(
+                    $row['AddressString'],
+                    $row['AreaCode']
+                );
+                $address->setAddressID($row['AddressID']);
+
+                return $address;
+
+            }
+
+        }
+
         public function createAddress($address) {
 
-            $stmt = $this->dbConnection->prepare("INSERT INTO Addresses(AddressID, AddressString, AreaCode) VALUES (:addressId, :addressString, :areaCode)");
-            return $stmt->execute([
-                'addressId' => $address->getAddressID(),
+            $sql = "INSERT INTO Addresses(AddressString, AreaCode) VALUES (:addressString, :areaCode)";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
                 'addressString' => $address->getAddressString(),
                 'areaCode' => $address->getAreaCode()
             ]);
+
+            if ($stmt->rowCount() > 0) {
+                return $this->getAddressByID($this->dbConnection->lastInsertId());
+            }
+            else {
+                return false;
+            }
 
         }
 
         public function updateAddress($address) {
 
-            $stmt = $this->dbConnection->prepare("UPDATE Addresses SET AddressString = :addressString, AreaCode = :areaCode WHERE AddressID = :addressId");
+            $sql = "UPDATE Addresses SET AddressString = :addressString, AreaCode = :areaCode WHERE AddressID = :addressId";
+
+            $stmt = $this->dbConnection->prepare($sql);
             return $stmt->execute([
                 'addressString' => $address->getAddressString(),
                 'areaCode' => $address->getAreaCode(),
                 'addressId' => $address->getAddressID()
             ]);
-
         }
 
         public function deleteAddress($addressID) {

@@ -1,6 +1,7 @@
 <?php
 
     class Product implements JsonSerializable {
+        
         private $productID;
         private $productName;
         private $description;
@@ -8,8 +9,7 @@
         private $quantityAvailable;
         private $imageURL;
 
-        public function __construct($productID, $productName, $description, $price, $quantityAvailable, $imageURL) {
-            $this->productID = $productID;
+        public function __construct($productName, $description, $price, $quantityAvailable, $imageURL) {
             $this->productName = $productName;
             $this->description = $description;
             $this->price = $price;

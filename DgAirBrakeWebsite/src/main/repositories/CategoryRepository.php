@@ -1,7 +1,7 @@
 <?php
 
-    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
     require_once __DIR__ . '/../../main/model/Category.php';
+    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class CategoryRepository {
 
@@ -22,9 +22,9 @@
 
             while ($row = $result->fetch()) {
                 $category = new Category(
-                    $row['CategoryID'],
                     $row['CategoryName']
                 );
+                $category->setCategoryID($row['CategoryID']);
 
                 $allCategories[] = $category;
             }
@@ -33,16 +33,46 @@
 
         }
 
+        public function getCategoryBYID($categoryID) {
+
+            $sql = "SELECT * FROM Categories WHERE CategoryID = :categoryId";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'categoryId' => $categoryID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $category = new Category(
+                    $row['CategoryName']
+                );
+                $category->setCategoryID($row['CategoryID']);
+
+                return $category;
+
+            }
+
+        }
+
         public function createCategory($category) {
 
-            $sql = "INSERT INTO Categories (CategoryID, CategoryName)
-                    VALUES (:categoryId, :categoryName)";
+            $sql = "INSERT INTO Categories (CategoryName)
+                    VALUES (:categoryName)";
             
             $stmt = $this->dbConnection->prepare($sql);
-            return $stmt->execute([
-                'categoryId' => $category->getCategoryID(),
+            $stmt->execute([
                 'categoryName' => $category->getCategoryName()
             ]);
+
+            if ($stmt->rowCount() > 0) {
+                return $this->getCategoryBYID($this->dbConnection->lastInsertId());
+            }
+            else {
+                return false;
+            }
 
         }
 

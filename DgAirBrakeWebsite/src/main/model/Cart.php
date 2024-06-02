@@ -5,9 +5,8 @@
         private $cartID;
         private $customerID;
 
-        public function __construct($cartID, $customerID) {
+        public function __construct($customerID) {
             
-            $this->cartID = $cartID;
             $this->customerID = $customerID;
 
         }

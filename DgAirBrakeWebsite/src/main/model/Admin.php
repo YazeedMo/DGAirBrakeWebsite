@@ -6,11 +6,9 @@
 
         private $adminID;
 
-        public function __construct($adminID, $userID, $username, $password, $email) {
+        public function __construct($username, $password, $email) {
 
-            parent::__construct($userID , $username, $password, $email, 'Admin');
-
-            $this->adminID = $adminID;
+            parent::__construct($username, $password, $email, 'Admin');
             
         }
 

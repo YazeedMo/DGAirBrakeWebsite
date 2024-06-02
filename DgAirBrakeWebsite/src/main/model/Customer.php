@@ -7,11 +7,10 @@
         private $customerID;
         private $cardID;
 
-        public function __construct($customerID, $userID, $username, $password, $email, $cardID) {
+        public function __construct($username, $password, $email, $cardID) {
 
-            parent::__construct($userID, $username, $password, $email, 'Customer');
+            parent::__construct($username, $password, $email, 'Customer');
 
-            $this->customerID = $customerID;
             $this->cardID = $cardID;
             
         }
@@ -20,7 +19,7 @@
             return $this->customerID;
         }
 
-        public function getcardID() {
+        public function getCardID() {
             return $this->cardID;
         }
 

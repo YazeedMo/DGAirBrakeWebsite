@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.tabs {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tab-button:hover {
+    background-color: #e6e6e6;
+}
+
+.form-section {
+    padding: 20px;
+    background-color: #fff;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    height: 280px;
+}
+
+.navigation {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.navigation button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navigation button:hover {
+    background-color: #0056b3;
+}
+
+.navigation button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* Form section styling */
+.notification {
+    color: red;
+}
+
+.form-section {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 400px; /* Limiting the maximum width */
+    margin-left: auto; /* Centering the form horizontally */
+    margin-right: auto; /* Centering the form horizontally */
+}
+
+/* Form grid layout */
+.form-group {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-column-gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Form field label styling */
+.form-group label {
+    justify-self: end;
+}
+
+/* Form field input styling */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Highlight invalid fields */
+.invalid {
+    border: 1px solid red !important; /* Corrected border property */
+}

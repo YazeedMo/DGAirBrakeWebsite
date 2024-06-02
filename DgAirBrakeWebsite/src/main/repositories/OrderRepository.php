@@ -1,7 +1,7 @@
 <?php
 
-    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
     require_once __DIR__ . '/../../main/model/Order.php';
+    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class OrderRepository {
 
@@ -21,12 +21,12 @@
             $result = $this->dbConnection->query($query);
             while ($row = $result->fetch()) {
                 $order = new Order(
-                    $row['OrderID'],
                     $row['CustomerID'],
                     $row['OrderDate'],
                     $row['TotalAmount'],
                     $row['OrderStatus']
                 );
+                $order->setOrderID($row['OrderID']);
 
                 $allOrders[] = $order;
             }
@@ -35,19 +35,52 @@
 
         }
 
-        public function createOrder($order) {
+        public function getOrderByID($orderID) {
 
-            $sql = "INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount, OrderStatus)
-                    VALUES (:orderId, :customerId, :orderDate, :totalAmount, :orderStatus)";
+            $sql = "SELECT * FROM Orders WHERE OrderID = :orderId";
 
             $stmt = $this->dbConnection->prepare($sql);
-            return $stmt->execute([
-                'orderId' => $order->getOrderID(),
+            $stmt->execute([
+                'orderId' => $orderID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $order = new Order(
+                    $row['CustomerID'],
+                    $row['OrderDate'],
+                    $row['TotalAmount'],
+                    $row['OrderStatus']
+                );
+                $order->setOrderID($row['OrderID']);
+
+                return $order;
+
+            }
+
+        }
+
+        public function createOrder($order) {
+
+            $sql = "INSERT INTO Orders (CustomerID, OrderDate, TotalAmount, OrderStatus)
+                    VALUES (:customerId, :orderDate, :totalAmount, :orderStatus)";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
                 'customerId' => $order->getCustomerID(),
                 'orderDate' => $order->getOrderDate(),
                 'totalAmount' => $order->getTotalAmount(),
                 'orderStatus' => $order->getOrderStatus()
             ]);
+
+            if ($stmt->rowCount() > 0) {
+                return $this->getOrderByID($this->dbConnection->lastInsertId());
+            }
+            else {
+                return false;
+            }
 
         }
 

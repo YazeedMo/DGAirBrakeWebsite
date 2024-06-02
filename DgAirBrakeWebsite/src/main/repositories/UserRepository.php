@@ -1,8 +1,9 @@
 <?php
 
-    require_once __DIR__ .  '/../../main/config/DatabaseConnection.php';
     require_once __DIR__ . '/../../main/model/User.php';
+    require_once __DIR__ . '/../../main/model/Admin.php';
     require_once __DIR__ . '/../../main/model/Customer.php';
+    require_once __DIR__ .  '/../../main/config/DatabaseConnection.php';
 
     abstract class UserRepository {
 
@@ -16,7 +17,9 @@
 
         public function getUserByID($userID) {
 
-            $stmt = $this->dbConnection->prepare("SELECT * FROM Users WHERE UserID = :userID");
+            $sql = "SELECT * FROM Users WHERE UserID = :userID";
+
+            $stmt = $this->dbConnection->prepare($sql);
             $stmt->execute(['userID' => $userID]);
             $row = $stmt->fetch();
 
@@ -24,19 +27,27 @@
 
                 if ($row['Role'] === 'Admin') {
                     $user = new Admin(
-                        $row['AdminID'],
-                        $row['UserID'],
                         $row['Username'],
                         $row['Password'],
                         $row['Email']
                     );
-
                     $user->setUserID($row['UserID']);
+                    $user->setAdminID($row['AdminID']);
 
                     return $user;
                 }
+                else if ($row['Role'] === 'Customer') {
+                    $user = new Customer(
+                        $row['Username'],
+                        $row['Password'],
+                        $row['Email'],
+                        $row['CardID']
+                    );
+                    $user->setUserID($row['UserID']);
+                    $user->setCustomerID($row['CustomerID']);
 
-                // Add logic for returning a Customer
+                }
+
             }
 
             return null;
@@ -45,27 +56,20 @@
 
         public function getUserByUsername($username) {
 
-            $stmt = $this->dbConnection->prepare("SELECT * FROM Users WHERE Username = :username");
+            $sql = "SELECT * FROM Users WHERE Username = :username";
+
+            $stmt = $this->dbConnection->prepare($sql);
             $stmt->execute(['username' => $username]);
             $row = $stmt->fetch();
 
             if ($row) {
 
                 if ($row['Role'] === 'Admin') {
-                    $user = new Admin(
-                        $row['AdminID'],
-                        $row['userID'],
-                        $row['Username'],
-                        $row['Password'],
-                        $row['Email']
-                    );
-
-                    $user->setUserID($row['UserID']);
-
-                    return $user;
+                    return $this->getAdminByUsername($username);
                 }
-
-                // Add logic for returning a Customer
+                elseif ($row['Role'] === 'Customer') {
+                    return $this->getCustomerByUsername($username);
+                }
             }
 
             return null;
@@ -74,11 +78,62 @@
 
         public function deleteUserByID($userID) {
 
-            $stmt = $this->dbConnection->prepare("CALL DeleteUser(:userId)");
+            $sql = "CALL DeleteUser(:userId)";
+
+            $stmt = $this->dbConnection->prepare($sql);
 
             return $stmt->execute([
                 'userId' => $userID
             ]);
+
+        }
+
+        private function getAdminByUsername($username) {
+
+            $sql = "SELECT * FROM Users_Admins WHERE Username = :username";
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute(['username' => $username]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $user = new Admin(
+                    $row['Username'],
+                    $row['Password'],
+                    $row['Email']
+                );
+                $user->setUserID($row['UserID']);
+                $user->setAdminID($row['AdminID']);
+
+                return $user;
+
+            }
+
+        }
+
+        private function getCustomerByUsername($username) {
+
+            $sql = "SELECT * FROM Users_Customers WHERE Username = :username";
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute(['username' => $username]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $user = new Customer(
+                    $row['Username'],
+                    $row['Password'],
+                    $row['Email'],
+                    $row['CardID']
+                );
+                $user->setUserID($row['UserID']);
+                $user->setCustomerID($row['CustomerID']);
+
+                return $user;
+
+            }
 
         }
 

@@ -22,13 +22,13 @@
 
             while ($row = $result->fetch()) {
                 $product = new Product(
-                    $row['ProductID'],
                     $row['ProductName'],
                     $row['Description'],
                     $row['Price'],
                     $row['QuantityAvailable'],
                     $row['ImageURL']
                 );
+                $product->setProductID($row['ProductID']);
 
                 $allProducts[] = $product;
 
@@ -38,17 +38,55 @@
 
         }
 
+        public function getProductByID($productID) {
+
+            $sql = "SELECT * FROM Products WHERE ProductID = :productId";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'productId' => $productID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $product = new Product(
+                    $row['ProductName'],
+                    $row['Description'],
+                    $row['Price'],
+                    $row['QuantityAvailable'],
+                    $row['ImageURL']
+                );
+                $product->setProductID($row['ProductID']);
+
+                return $product;
+
+            }
+
+        }
+
         public function createProduct($product) {
 
-            $stmt = $this->dbConnection->prepare("INSERT INTO Products (ProductID, ProductName, Description, Price, QuantityAvailable, ImageURL) VALUES (:productId, :productName, :description, :price, :quantityAvailable, :imageUrl)");
-            return $stmt->execute([
-                'productId' => $product->getProductID(),
+            $sql = "INSERT INTO Products
+                    (ProductName, Description, Price, QuantityAvailable, ImageURL)
+                    VALUES (:productName, :description, :price, :quantityAvailable, :imageUrl)";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
                 'productName' => $product->getProductName(),
                 'description' => $product->getDescription(),
                 'price' => $product->getPrice(),
                 'quantityAvailable' => $product->getQuantityAvailable(),
                 'imageUrl' => $product->getImageURL()
             ]);
+
+            if ($stmt->rowCount() > 0) {
+                return $this->getProductByID($this->dbConnection->lastInsertId());
+            }
+            else {
+                return false;
+            }
 
         }
 

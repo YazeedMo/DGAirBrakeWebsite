@@ -1,7 +1,7 @@
 <?php
 
-    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
     require_once __DIR__ . '/../../main/model/Cart.php';
+    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class CartRepository {
 
@@ -22,9 +22,9 @@
             $result = $this->dbConnection->query($query);
             while ($row = $result->fetch()) {
                 $cart = new Cart(
-                    $row['CartID'],
                     $row['CustomerID']
                 );
+                $cart->setCartID($row['CartID']);
 
                 $allCarts[] = $cart;
             }
@@ -33,16 +33,46 @@
 
         }
 
-        public function createCart($cart) {
+        public function getCartByID($cartID) {
 
-            $sql = "INSERT INTO Carts (CartID, CustomerID)
-                    VALUES (:cartId, :customerId)";
+            $sql = "SELECT * FROM Carts WHERE CartID = :cartId";
 
             $stmt = $this->dbConnection->prepare($sql);
-            return $stmt->execute([
-                'cartId' => $cart->getCartID(),
+            $stmt->execute([
+                'cartId' => $cartID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $cart = new Cart(
+                    $row['CustomerID']
+                );
+                $cart->setCartID($row['CartID']);
+
+                return $cart;
+
+            }
+
+        }
+
+        public function createCart($cart) {
+
+            $sql = "INSERT INTO Carts (CustomerID)
+                    VALUES (:customerId)";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
                 'customerId' => $cart->getCustomerId()
             ]);
+
+            if ($stmt->rowCount() > 0) {
+                return $this->getCartByID($this->dbConnection->lastInsertId());
+            }
+            else {
+                return false;
+            }
 
         }
 

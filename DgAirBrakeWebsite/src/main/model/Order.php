@@ -8,8 +8,7 @@ class Order implements JsonSerializable {
     private $orderStatus;
 
     // Constructor
-    public function __construct($orderID, $customerID, $orderDate, $totalAmount, $orderStatus) {
-        $this->orderID = $orderID;
+    public function __construct($customerID, $orderDate, $totalAmount, $orderStatus) {
         $this->customerID = $customerID;
         $this->orderDate = $orderDate;
         $this->totalAmount = $totalAmount;
@@ -18,44 +17,44 @@ class Order implements JsonSerializable {
 
     // Getters
     public function getOrderID() {
-        return $this->OrderID;
+        return $this->orderID;
     }
 
     public function getCustomerID() {
-        return $this->CustomerID;
+        return $this->customerID;
     }
 
     public function getOrderDate() {
-        return $this->OrderDate;
+        return $this->orderDate;
     }
 
     public function getTotalAmount() {
-        return $this->TotalAmount;
+        return $this->totalAmount;
     }
 
     public function getOrderStatus() {
-        return $this->OrderStatus;
+        return $this->orderStatus;
     }
 
     // Setters
     public function setOrderID($OrderID) {
-        $this->OrderID = $OrderID;
+        $this->orderID = $OrderID;
     }
 
     public function setCustomerID($CustomerID) {
-        $this->CustomerID = $CustomerID;
+        $this->customerID = $CustomerID;
     }
 
     public function setOrderDate($OrderDate) {
-        $this->OrderDate = $OrderDate;
+        $this->orderDate = $OrderDate;
     }
 
     public function setTotalAmount($TotalAmount) {
-        $this->TotalAmount = $TotalAmount;
+        $this->totalAmount = $TotalAmount;
     }
 
     public function setOrderStatus($OrderStatus) {
-        $this->OrderStatus = $OrderStatus;
+        $this->orderStatus = $OrderStatus;
     }
 
     public function jsonSerialize() {

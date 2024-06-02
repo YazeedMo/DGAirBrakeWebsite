@@ -1,6 +1,6 @@
 async function getAllProducts() {
     try {
-        const response = await fetch('../../src/main/services/ProductService.php?action=getAllProducts');
+        const response = await fetch('src/main/services/ProductService.php?action=getAllProducts');
         if (!response.ok) {
             throw new Error("Error fetching data");
         }

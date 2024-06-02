@@ -6,8 +6,7 @@
         private $categoryID;
         private $categoryName;
 
-        public function __construct($categoryID, $categoryName) {
-            $this->categoryID = $categoryID;
+        public function __construct($categoryName) {
             $this->categoryName = $categoryName;            
         }
 

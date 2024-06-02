@@ -6,8 +6,7 @@
         private $addressString;
         private $areaCode;
 
-        public function __construct($addressID, $addressString, $areaCode) {
-            $this->addressID = $addressID;
+        public function __construct($addressString, $areaCode) {
             $this->addressString = $addressString;
             $this->areaCode = $areaCode;
         }

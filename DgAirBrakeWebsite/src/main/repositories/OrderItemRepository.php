@@ -1,7 +1,7 @@
 <?php
 
-    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
     require_once __DIR__ . '/../../main/model/CartItem.php';
+    require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class OrderItemRepository {
 
@@ -22,12 +22,12 @@
             $result = $this->dbConnection->query($query);
             while ($row = $result->fetch()) {
                 $orderItem = new OrderItem(
-                    $row['OrderItemID'],
                     $row['OrderID'],
                     $row['ProductID'],
                     $row['Quantity'],
                     $row['Price']
                 );
+                $orderItem->setOrderItemID($row['OrderItemID']);
 
                 $allOrderitems[] = $orderItem;
             }
@@ -35,19 +35,52 @@
             return $allOrderitems;
         }
 
-        public function createOrderItem($orderItem) {
+        public function getOrderItemByID($orderItemID) {
 
-            $sql = "INSERT INTO OrderItems (OrderItemID, OrderID, ProductID, Quantity, Price)
-                    VALUES (:orderItemId, :orderId, :productId, :quantity, :price)";
+            $sql = "SELECT * FROM OrderItems WHERE OrderItemID = :orderItemId";
 
             $stmt = $this->dbConnection->prepare($sql);
-            return $stmt->execute([
-                'orderItemId' => $orderItem->getOrderItemID(),
+            $stmt->execute([
+                'orderItemId' => $orderItemID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $orderItem = new OrderItem(
+                    $row['OrderID'],
+                    $row['ProductID'],
+                    $row['Quantity'],
+                    $row['Price']
+                );
+                $orderItem->setOrderItemID($row['OrderItemID']);
+
+                return $orderItem;
+
+            }
+
+        }
+
+        public function createOrderItem($orderItem) {
+
+            $sql = "INSERT INTO OrderItems (OrderID, ProductID, Quantity, Price)
+                    VALUES (:orderId, :productId, :quantity, :price)";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
                 'orderId' => $orderItem->getOrderID(),
                 'productId' => $orderItem->getProductID(),
                 'quantity' => $orderItem->getQuantity(),
                 'price' => $orderItem->getPrice()
             ]);
+
+            if ($stmt->rowCount() > 0) {
+                return $this->getOrderItemByID($this->dbConnection->lastInsertId());
+            }
+            else {
+                return false;
+            }
 
         }
 
