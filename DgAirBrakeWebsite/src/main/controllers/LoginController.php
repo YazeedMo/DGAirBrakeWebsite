@@ -1,9 +1,9 @@
 <?php
 
-    require_once __DIR__ . '/../../main/services/LoginService.php';
     require_once __DIR__ . '/../../main/model/User.php';
-
-    session_start();
+    require_once __DIR__ . '/../../main/services/LoginService.php';
+    require_once __DIR__ . '/../../main/util/Session.php';
+    require_once __DIR__ . '/../../main/util/Session.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
 
@@ -33,9 +33,9 @@
                 echo json_encode(['message' => 'Invalid']);
             }
             else {
-                $_SESSION['current_user'] = $user;
+                setSessionCurrentUser($user);
                 if ($user->getRole() === "Admin") {
-                    header('Location: AdminPanelController.php');
+                    header('Location: ../../../admin_panel.php');
                     exit();
                 }
                 elseif ($user->getRole() === "Customer") {

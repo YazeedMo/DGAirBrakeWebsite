@@ -19,6 +19,7 @@
 
     <!-- Form Sections -->
     <div class="form-section" id="personal-details-section">
+        
         <h2>Personal Details</h2>
         <p class="notification" style="display: none;">This is an notification message</p>
         <form id="user-details-form">

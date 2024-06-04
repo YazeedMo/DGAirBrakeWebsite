@@ -60,12 +60,68 @@ body {
     background-color: #3498db;
     color: #fff;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logout-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#logout-btn:hover {
+    background-color: #c0392b;
 }
 
 .main-content {
     flex: 1;
     padding: 20px;
     background-color: #f1f1f1;
+}
+
+.add-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background-color: #45a049;
+}
+
+.edit-btn {
+    margin-right: 5px;
+    background-color: #FFA500;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background-color: #FF8C00;
+}
+
+.delete-btn {
+    margin-left: 5px;
+    background-color: #FF0000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover{
+    background-color: #DC143C;
 }
 
 .product-table {

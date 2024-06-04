@@ -38,18 +38,3 @@
     pointer-events: none;
     overflow: hidden;
 }
-
-/* .top-bar {
-    pointer-events: none;
-    filter: blur(2px);
-}
-
-.main-section {
-    pointer-events: none;
-    filter: blur(5px);
-    overflow: hidden;
-}
-
-body {
-    overflow: hidden;
-} */

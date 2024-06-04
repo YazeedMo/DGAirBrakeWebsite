@@ -1,8 +1,7 @@
 <?php
 
     require_once __DIR__ . '/../../main/services/RegistrationService.php';
-
-    session_start();
+    require_once __DIR__ . '/../../main/util/Session.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
 
@@ -103,7 +102,7 @@
             echo json_encode(['status' => 'error', 'message' => 'Registration failed']);
         }
         else {
-            $_SESSION['current_user'] = $currentUser;
+            setSessionCurrentUser($currentUser);
             echo json_encode(['status' => 'success', 'redirectUrl' => 'index.php']);
         }
 

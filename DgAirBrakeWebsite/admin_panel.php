@@ -1,34 +1,54 @@
+<?php
+
+    require_once __DIR__ . '/src/main/util/Session.php';
+    require_once __DIR__ . '/src/main/model/User.php';
+    require_once __DIR__ . '/src/main/model/Admin.php';
+    require_once __DIR__ . '/src/main/model/Customer.php';
+
+    $currentUser = false;
+    $username = "Login";
+
+    $currentUser = getSessionCurrentUser();
+
+    if (!$currentUser === false) {
+        $username = $currentUser->getUsername();
+    }
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/admin_dashboard_styles/style.css">
+    <link rel="stylesheet" href="resources/styles/admin_panel_styles/style.css">
+    <link rel="stylesheet" href="resources/styles/admin_panel_styles/add_product_modal.css">
     <title>Document</title>
 </head>
 <body>
 
-    Hello Admin
-
-    <!-- <div class="container">
+    <div class="container">
         <div class="sidebar">
             <div class="sidebar-header">
                 Admin Panel
             </div>
-            <div class="sidebar-menu">
+            <div class="sidebar-menu" id="manage-products-btn" onclick="changeView('manage-products-view')">
                 Manage Products
             </div>
-            <div class="sidebar-menu">
+            <div class="sidebar-menu" id="manage-orders-btn" onclick="changeView('manage-orders-view')">
                 Manage Orders
             </div>
         </div>
         <div class="main-area">
             <div class="top-bar">
-                Top Bar
+                <span id="testLabel">Hello, <?php echo $username?></span>
+                <button id="logout-btn" onclick="logout()">Logout</button>
             </div>
             <div class="main-content">
 
-                <div id="manage-products-view">
+                <div class="menu-view" id="manage-products-view">
 
                     <table class="product-table">
                         <thead>
@@ -42,18 +62,65 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody> -->
-                            <!-- Randomly generated rows will be inserted here -->
-                        <!-- </tbody>
+                        <tbody>
+                            <!-- Rows will be inserted here -->
+                        </tbody>
                     </table>
+                    <button class="add-btn" id="add-product-btn" onclick="addProduct()">Add New Product</button>
+                    <img id="image-preview">
+
+                </div>
+
+                <div class="menu-view" id="manage-orders-view" style="display: none;">
+
+                    manager orders
 
                 </div>
 
             </div>
         </div>
-    </div> -->
-
-    <script src="../scripts/admin_dashboard_scripts/admin_dashboard_script.js"></script>
+    </div>
 
 </body>
+
+<!-- Add Product Modal -->
+<div class="modal" id="add-product-modal" style="display: none;">
+
+    <div class="modal-content">
+
+        <span class="close">&times;</span>
+        <h2>Add New Product</h2>
+        <p class="notification" id="add-new-product-notification" style="display: none;">This is a notification message</p>
+
+        <form id="add-product-form" enctype="multipart/form-data" onsubmit="submitForm(event)">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="product-name" name="product-name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price">
+            </div>
+            <div class="form-group">
+                <label for="quantity-available">Quantity Available:</label>
+                <input type="number" id="quantity-available" name="quantity-available">
+            </div>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <button class="submit-btn" id="submit-product-btn">Add Product</button>
+        </form>
+
+    </div>
+
+</div>
+
+<script src="resources/scripts/admin_panel_scripts/script.js"></script>
+<script src="resources/scripts/admin_panel_scripts/add_product_script.js"></script>
+
 </html>

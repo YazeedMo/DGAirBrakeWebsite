@@ -1,9 +1,18 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Upload</title>
+</head>
+<body>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="button" value="Upload Image" onclick="uploadImage()">
+</form>
 
-    $password = "password";
+<div id="status"></div>
 
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    echo "Hashed Password: " . $hashed_password;
-
-?>
+<script src="script.js"></script>
+</body>
+</html>

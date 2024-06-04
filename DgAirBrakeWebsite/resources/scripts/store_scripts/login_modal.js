@@ -33,15 +33,6 @@ closeButton.onclick = function() {
 
 }
 
-// Fix this function -> Suppose to close modal window when clicking on background
-// window.onclick = function(event) {
-
-//     if (event.target.classList.contains("store")) {
-//         modal.style.display = "none";
-//         background.classList.remove("disable");
-//     }
-// }
-
 const loginForm = document.getElementById("login-modal");
 
 loginForm.addEventListener("submit", function(event) {

@@ -78,7 +78,7 @@
                 'description' => $product->getDescription(),
                 'price' => $product->getPrice(),
                 'quantityAvailable' => $product->getQuantityAvailable(),
-                'imageUrl' => $product->getImageURL()
+                'imageUrl' => 'resources/images/products/' . $product->getImageURL()
             ]);
 
             if ($stmt->rowCount() > 0) {

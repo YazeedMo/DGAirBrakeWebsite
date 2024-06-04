@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DG Air Brake & Hydraulic Repairs</title>
-    <link rel="stylesheet" href="../styles/home_styles/style.css">
-    <link rel="stylesheet" href="../styles/home_styles/styles-large.css" media="(min-width: 601px)">
-    <link rel="stylesheet" href="../styles/home_styles/styles-small.css" media="(max-width: 600px)">
+    <link rel="stylesheet" href="resources/styles/home_styles/style.css">
+    <link rel="stylesheet" href="resources/styles/home_styles/styles-large.css" media="(min-width: 601px)">
+    <link rel="stylesheet" href="resources/styles/home_styles/styles-small.css" media="(max-width: 600px)">
     <script src="https://kit.fontawesome.com/4b11123c7d.js" crossorigin="anonymous"></script>
 </head>
 <body>
