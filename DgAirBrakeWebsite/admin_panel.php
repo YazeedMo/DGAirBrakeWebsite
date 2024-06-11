@@ -66,7 +66,7 @@
                             <!-- Rows will be inserted here -->
                         </tbody>
                     </table>
-                    <button class="add-btn" id="add-product-btn" onclick="addProduct()">Add New Product</button>
+                    <button class="add-btn" id="add-new-product-btn" onclick="addProduct()">Add New Product</button>
                     <img id="image-preview">
 
                 </div>
@@ -84,13 +84,13 @@
 </body>
 
 <!-- Add Product Modal -->
-<div class="modal" id="add-product-modal" style="display: none;">
+<div class="modal" id="manage-product-modal" style="display: none;">
 
     <div class="modal-content">
 
         <span class="close">&times;</span>
-        <h2>Add New Product</h2>
-        <p class="notification" id="add-new-product-notification" style="display: none;">This is a notification message</p>
+        <h2 id="modal-heading">Add New Product</h2>
+        <p class="notification" id="notification-label" style="display: none;">This is a notification message</p>
 
         <form id="add-product-form" enctype="multipart/form-data" onsubmit="submitForm(event)">
             <div class="form-group">
@@ -103,7 +103,7 @@
             </div>
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="number" id="price" name="price">
+                <input type="number" step="0.01" id="price" name="price">
             </div>
             <div class="form-group">
                 <label for="quantity-available">Quantity Available:</label>
@@ -113,7 +113,9 @@
                 <label for="image">Image:</label>
                 <input type="file" id="image" name="image">
             </div>
-            <button class="submit-btn" id="submit-product-btn">Add Product</button>
+            <button class="submit-btn" id="edit-product-btn">Edit Product</button>
+            <button class="submit-btn" id="add-product-btn">Add Product</button>
+            <button class="submit-btn" id="delete-product-btn" style="background-color: red;">Delete Product</button>
         </form>
 
     </div>
@@ -121,6 +123,7 @@
 </div>
 
 <script src="resources/scripts/admin_panel_scripts/script.js"></script>
-<script src="resources/scripts/admin_panel_scripts/add_product_script.js"></script>
+<script src="resources/scripts/admin_panel_scripts/manage_products
+.js"></script>
 
 </html>

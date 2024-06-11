@@ -5,6 +5,7 @@
     require_once __DIR__ . '/../../main/util/Session.php';
     require_once __DIR__ . '/../../main/util/Session.php';
 
+    // Check if Reuqest Method is POST and action variable is set
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action'])) {
 
         $action = $_GET['action'];
@@ -16,6 +17,7 @@
 
     }
 
+    // Get user detils and check if credentials are valid
     function attemptLogin() {
 
         $loginService = new LoginService;
@@ -43,7 +45,6 @@
                 }
             }
         }
-
     }
 
 ?>

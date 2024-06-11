@@ -3,13 +3,12 @@
     require_once __DIR__ . '/src/main/model/User.php';
     require_once __DIR__ . '/src/main/model/Customer.php';
     require_once __DIR__ . '/src/main/model/Admin.php';
+    require_once __DIR__ . '/src/main/util/Session.php';
 
-    session_start();
-    
-    $username = "Login";
+    $username = 'Login';
 
-    if (isset($_SESSION['current_user'])) {
-        $user = $_SESSION['current_user'];
+    if (getSessionCurrentUser()) {
+        $user = getSessionCurrentUser();
         $username = $user->getUsername();
     }
 
@@ -22,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DG Air Brake Store</title>
     <link rel="stylesheet" href="resources/styles/store_styles/style.css">
+    <link rel="stylesheet" href="resources/styles/store_styles/product_modal_style.css">
     <link rel="stylesheet" href="resources/styles/store_styles/login_modal_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
  
@@ -30,75 +30,171 @@
 </head>
 <body>
 
-    <div class="store">    
-        <header class="top-bar">
-            <div class="logo">
-                <img src="resources/images/DGBusinessLogo.png" alt="Business Logo">
-            </div>
-            <div class="business-name">Air Brake & Hydraulic Repairs</div>
-            <div class="icons">
-                <div class="search">
-                    <input type="text" class="search-input" placeholder="Search...">
-                    <a href="search"><i class="fa-solid fa-magnifying-glass" style="font-size: 1.2em;"></i></a>
+    <div class="top-bar">
+        <div class="left-section">
+            <img src="resources/images/DGBusinessLogo.png" class="business-logo">
+            <span class="business-name">Air Brake & <br> Hydraulic Repairs</span>
+        </div>
+        <div class="center-section">
+            <a href="home.php" class="page-link">
+                <div class="link-box">
+                    <span class="link-name">Home</span>
                 </div>
-                <a href="cart"><i class="fa-solid fa-cart-shopping" style="font-size: 1.2em;"></i></a>
-                <a href="profile" id="profile-icon"><i class="fa-regular fa-user" style="font-size: 1.2em;"></i></a>
-                <p id="username"><?php echo $username?></p>
-            </div>
-        </header>
+            </a>
+        </div>
+        <div class="right-section">
+            <a href="#" class="icon-link" id="search-icon" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="#" class="icon-link" id="cart-icon"><i class="fa-solid fa-cart-shopping"></i>
+            <a href="#" class="icon-link" id="profile-icon" onclick="openLoginModal()">
+                <i class="fa-regular fa-user"></i>
+                <p><?php echo $username?></p>
+            </a>
+        </div>
+    </div>
 
-        <h1 id="product-info"></h1>
-
-        <section class="main-section">
-            <div class="main-grid">
-                <div class="options-grid">
-
-
-                    <div class="category-box">
-                        <h3>Categories</h3>
-                        <ul class="category-list">
-                            <li><input type="checkbox" id="category1"><label for="category1">Category 1 </label></li>
-                            <li><input type="checkbox" id="category2"><label for="category2">Category 2 </label></li>
-                            <li><input type="checkbox" id="category3"><label for="category3">Category 3 </label></li>
-                            <li><input type="checkbox" id="category4"><label for="category4">Category 4 </label></li>
-                        </ul>
-                    </div>
-
-
+    <div class="main-container">
+        <div class="filter-box">
+            <input type="text" id="search-box" placeholder="Search...">
+            <button id="search-box-icon-container" onclick="displayProductsByKeyword()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div id="main-product-grid">
+            <!-- <div class="product-box">
+                <div class="product-image-container">
+                    <img class="product-image" src="resources/images/products/clamp_band.jpg">
                 </div>
-
-                <div class="product-grid">
-                    <!-- <div class="product-card">
-                        <img src="../images/products/door_control_modulator.jpg" alt="product Image" class="product-image">
-                        <div class="product-info">
-                            <h3 class="product-title">Brack for replacement</h3>
-                            <p class="product-price">$99.99</p>
-                        </div>
-                    </div> -->
+                <div class="product-info">
+                    <h2 class="product-name">Product Name</h2>
+                    <p class="product-price">RXX.XX</p>
                 </div>
-                
+            </div> -->
+            <div class="product-box">
+                <div class="product-image-container">
+                    <img class="product-image" src="resources/images/products/foot_brake_modulator.jpg">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Foot Brake Modulator</h2>
+                    <p class="product-price">R399.99</p>
+                </div>
             </div>
-        </section>
+
+            <div class="product-box">
+                <div class="product-image-container">
+                    <img class="product-image" src="resources/images/products/gear_knob.jpg">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Gear Knob</h2>
+                    <p class="product-price">R209.99</p>
+                </div>
+            </div>
+
+            <div class="product-box">
+                <div class="product-image-container">
+                    <img class="product-image" src="resources/images/products/green_light.jpg">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Green Light</h2>
+                    <p class="product-price">R80</p>
+                </div>
+            </div>
+
+            <div class="product-box">
+                <div class="product-image-container">
+                    <img class="product-image" src="resources/images/products/hand_brake_modulator.jpg">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Hand Brake Modulator</h2>
+                    <p class="product-price">180</p>
+                </div>
+            </div>
+
+            <div class="product-box">
+                <div class="product-image-container">
+                    <img class="product-image" src="resources/images/products/hand_brake_valve.jpg">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Hand Brake Valve</h2>
+                    <p class="product-price">R219.99</p>
+                </div>
+            </div>
+
+            <div class="product-box">
+                <div class="product-image-container">
+                    <img class="product-image" src="resources/images/products/horn.jpg">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Horn</h2>
+                    <p class="product-price">R150</p>
+                </div>
+            </div>
+
+            <div class="product-box">
+                <div class="product-image-container">
+                    <img class="product-image" src="resources/images/products/manoeuvring_modulator.jpg">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Manoeuvring Modulator</h2>
+                    <p class="product-price">R289.90</p>
+                </div>
+            </div>
+
+        </div>    
+    </div>
+
+
+
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+
+
+    <!-- The Modal Product Window -->
+    <div id="product-modal" class="modal" style="display: none;">
+        <div class="product-modal-content">
+            <div class="product-modal-header">
+                <h2>Product Name</h2>
+                <span class="product-modal-close" onclick="closeProductModal()">&times;</span>
+            </div>
+            <div class="product-modal-body">
+                <div class="product-modal-image-container">
+                    <img class="product-modal-image">
+                </div>
+                <div class="product-modal-description">
+                    <h3>Description:</h3>
+                    <p>Product Description</p>
+                </div>
+            </div>
+            <div class="product-modal-footer">
+                <div class="product-modal-price">Price</div>
+                <button class="product-modal-add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
     </div>
 
     <!-- The Modal Log In Window -->
     <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
+        <div class="login-modal-content">
+            <span class="login-modal-close" onclick="closeLoginModal()">&times;</span>
             <h2>Login</h2>
+            <p id="message">Message</p>
             <form id="login-form" action="/src/main/controllers/LoginController.php?action=attemptLogin" method="post">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br><br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br><br>
+                <div class="login-modal-form-group" id="login-modal-form-username-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required><br><br>
+                </div>
+                <div class="login-modal-form-group" id="login-modal-form-password-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required><br><br>
+                </div>
                 <button type="submit">Login</button>
                 <a href="registration.html" id="register-link">Register</a>
-                <p id="message"></p>
             </form>
         </div>
     </div>
 
     <script src="resources/scripts/store_scripts/store.js"></script>
+    <script src="resources/scripts/store_scripts/product_modal.js"></script>
     <script src="resources/scripts/store_scripts/login_modal.js"></script>
 
 </body>

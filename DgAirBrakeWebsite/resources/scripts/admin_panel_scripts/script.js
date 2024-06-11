@@ -42,8 +42,8 @@ async function getAllProducts() {
                     <td>${product.quantityAvailable}</td>
                     <td><a href="${product.imageURL}" target="_blank">View Image</a></td>
                     <td class="actions">
-                        <button class="edit-btn">Edit</button>
-                        <button class="delete-btn">Delete</button>
+                        <button class="edit-btn" onclick="editProduct(${product.productID})">Edit</button>
+                        <button class="delete-btn" onclick="deleteProduct(${product.productID})">Delete</button>
                     </td>
                 </tr>
             `;

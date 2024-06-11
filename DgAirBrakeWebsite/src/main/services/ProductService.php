@@ -1,69 +1,48 @@
 <?php
 
-    require_once __DIR__ . '/../../main/repositories/ProductRepository.php';
     require_once __DIR__ . '/../../main/model/Product.php';
+    require_once __DIR__ . '/../../main/repositories/ProductRepository.php';
 
+    class ProductService {
 
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+        private $productRepo;
 
-        // echo 'in get checking';
-
-        $action = $_GET['action'];
-        
-        switch ($action) {
-            case 'getAllProducts':
-                echo getAllProducts();
-                break;
-            default:
-                echo json_encode(['error' => 'Invalid action']);
-                http_response_code(400);
-                break;
+        public function __construct() {
+            $this->productRepo = new ProductRepository;
         }
 
-    }
-    elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
-        echo "in post checking";
+        public function getAllProducts() {
 
-        $action = $_POST['action'];
+            return $this->productRepo->getAllProducts();
 
-        switch($action) {
-            case 'addProduct':
-                echo addProduct();
-                break;
-            default:
-                echo json_encode(['error' => 'Invalid action']);
-                http_response_code(400);
-                break;
         }
 
-    }
-    else {
-        echo 'in else statement';
-        echo json_encode(['error' => 'Invalid action']);
-        http_response_code(400);
-    }
+        public function getProductByID($productID) {
 
-    function getAllProducts() {
+            return $this->productRepo->getProductByID($productID);
 
-        $productRepo = new ProductRepository;
+        }
 
-        return json_encode($productRepo->getAllProducts());
+        public function addNewProduct($productName, $description, $price, $quantityAvailable, $imageUrl) {
 
-    }
+            $newProduct = new Product($productName, $description, $price, $quantityAvailable, $imageUrl);
 
-    function addProduct() {
+            $this->productRepo->createProduct($newProduct);
 
-        // Handle file upload
-        // $target_dir = 'uploads/';
-        // $target_file = $target_dir . basename($_FILES["image"]["name"]);
+        }
 
-        // move_uploaded_file($_FILES["image"]['tmp_name'], $target_file);
+        public function deleteProductByID($productID) {
 
-        $productRepo = new ProductRepository;
-        $newProduct = new Product(12, 'new', 'very new', 34, 4, "image url");
+            $this->productRepo->deleteProductByID($productID);
 
-        $productRepo->createProduct($newProduct);
+        }
+
+        public function getProductsByKeyword($keyWord) {
+
+            return $this->productRepo->getProductsByKeyword($keyWord);
+
+        }
 
     }
 

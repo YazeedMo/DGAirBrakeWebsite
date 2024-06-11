@@ -15,6 +15,12 @@
             case 'getAllProducts':
                 getAllProducts();
                 break;
+            case 'getProductByID':
+                getProductByID();
+                break;
+            case 'deleteProductByID':
+                deleteProductByID();
+                break;
 
         }
 
@@ -48,6 +54,16 @@
 
         header('Content-Type: application/json');
         echo json_encode($allProducts);
+
+    }
+
+    function getProductByID() {
+
+        $productService = new ProductService;
+
+        $productID = $_GET['productId'];
+
+        echo json_encode($productService->getProductByID($productID));
 
     }
 
@@ -93,6 +109,18 @@
         else {
             return false;
         }
+
+    }
+
+    function deleteProductByID() {
+
+        $productId = $_GET['productId'];
+
+        $productService = new ProductService;
+
+        $productService->deleteProductByID($productId);
+
+        echo json_encode(['message' => 'success']);
 
     }
 

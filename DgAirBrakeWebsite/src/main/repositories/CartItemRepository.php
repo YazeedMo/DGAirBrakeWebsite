@@ -3,7 +3,7 @@
     require_once __DIR__ . '/../../main/model/CartItem.php';
     require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
-    class CartItem {
+    class CartItemRepository {
         
         private $dbConnection;
 
@@ -37,7 +37,7 @@
 
         public function getCartItemByID($cartItemID) {
 
-            $sql = "SELECT * FROM * FROM Cartitems WHERE CartItemID = :cartItemId";
+            $sql = "SELECT * FROM CartItems WHERE CartItemID = :cartItemId";
 
             $stmt = $this->dbConnection->prepare($sql);
             $stmt->execute([

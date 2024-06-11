@@ -55,6 +55,34 @@
 
             }
 
+            return null;
+
+        }
+
+        public function getCartByCustomerID($customerID) {
+
+            $sql = "SELECT * FROM Carts WHERE CustomerID = :customerID";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'customerID' => $customerID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+
+                $cart = new Cart(
+                    $row['CustomerID']
+                );
+                $cart->setCartID($row['CartID']);
+
+                return $cart;
+
+            }
+
+            return false;
+
         }
 
         public function createCart($cart) {

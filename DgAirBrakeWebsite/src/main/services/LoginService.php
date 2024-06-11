@@ -1,6 +1,7 @@
 <?php
 
     require_once __DIR__ . '/../../main/repositories/AdminRepository.php';
+    require_once __DIR__ . '/../../main/util/Session.php';
 
     class LoginService {
 
@@ -19,6 +20,7 @@
         public function verifyPassword($user, $password) {
 
             if (password_verify($password, $user->getPassword())) {
+                setSessionCurrentUser($user);
                 return true;
             }
             else {

@@ -1,83 +1,115 @@
-// Get the modal window
-const modal = document.getElementById("login-modal");
-
-// Get the button that opens the modal
 const profileIcon = document.getElementById("profile-icon");
 
-// Get the span element that closes the modal
+const loginModal = document.getElementById("login-modal");
 const closeButton = document.querySelector(".close");
 
-const usernameTextField = document.getElementById("username");
-const passwordField = document.getElementById("password");
-const messageLabel = document.getElementById("message");
+const messageLabel = document.getElementById('message');
 
-// Get the main section to prevent scrolling
-const mainSection = document.querySelector(".main-section");
+const usernameField = document.getElementById('username');
+const passwordField = document.getElementById('password');
 
-// Get the background
-const background = document.querySelector(".store");
 
-profileIcon.addEventListener("click", function(event) {
+loginModal.style.display = 'none';
+messageLabel.style.display = 'none';
 
-    event.preventDefault();         // Prevent default action of the <a> tag
-    modal.style.display = "block";
-    background.classList.add("disable");
-    usernameTextField.focus();
+function openLoginModal() {
 
-})
+    if (currentUserLabel.textContent === 'Login') {
+        console.log(loginModal.style.display);
 
-closeButton.onclick = function() {
-
-    modal.style.display = "none";
-    background.classList.remove("disable");
+        if (loginModal.style.display === 'none') {
+            loginModal.style.display = 'block';
+            usernameField.select();
+        }
+        else {
+            loginModal.style.display = 'none';
+        }
+    }
+    else {
+        window.location.href = 'profile.php';
+    }
 
 }
 
-const loginForm = document.getElementById("login-modal");
+function closeLoginModal() {
+
+    loginModal.style.display = 'none';
+
+}
+
+const loginForm = document.getElementById("login-form");
 
 loginForm.addEventListener("submit", function(event) {
 
+    messageLabel.textContent = 'login form sent';
     event.preventDefault();
 
-    const form = document.getElementById("login-form");
-    const formData = new FormData(form);
+    const formData = new FormData(loginForm);
 
     fetch("src/main/controllers/LoginController.php?action=attemptLogin", {
-        method: "POST",
+        method: 'POST',
         body: formData
     })
     .then(response => {
-        if (response.ok) {
-            // Check if the response is a redirect (status code 302)
-            if (response.redirected) {
-
-                usernameTextField.value = "";
-
-                // Manually redirect to the location specified in the response
-                window.location.href = response.url;
-            }
-            else {
-                return response.json();
-            }
+        if (!response.ok) {
+            console.log('error');
+        }
+        else {
+            return response.json();
         }
     })
     .then(data => {
-
-        console.log(data.message);
-        if (data.message == "Invalid") {
-            messageLabel.textContent = "Invalid Username or Password";
-            usernameTextField.select();
+        console.log(data);
+        if (data.message === 'Invalid') {
+            messageLabel.style.display = 'block';
+            messageLabel.textContent = 'Incorrect username or password';
         }
         else {
-            passwordField.value = "";
-            modal.style.display = "none";
-            background.classList.remove("disable");
+            messageLabel.style.display = 'none';
             location.reload();
         }
-        console.log(data);
     })
-    .catch(error => {
-        console.log("Error:", error);
-    });
+
+
+    // const form = document.getElementById("login-form");
+    // const formData = new FormData(form);
+
+    // fetch("src/main/controllers/LoginController.php?action=attemptLogin", {
+    //     method: "POST",
+    //     body: formData
+    // })
+    // .then(response => {
+    //     if (response.ok) {
+    //         // Check if the response is a redirect (status code 302)
+    //         if (response.redirected) {
+
+    //             usernameTextField.value = "";
+
+    //             // Manually redirect to the location specified in the response
+    //             window.location.href = response.url;
+    //         }
+    //         else {
+    //             return response.json();
+    //         }
+    //     }
+    // })
+    // .then(data => {
+
+    //     console.log(data.message);
+    //     if (data.message == "Invalid") {
+    //         messageLabel.textContent = "Invalid Username or Password";
+    //         usernameTextField.select();
+    //     }
+    //     else {
+    //         passwordField.value = "";
+    //         modal.style.display = "none";
+    //         background.classList.remove("disable");
+    //         location.reload();
+    //     }
+    //     console.log(data);
+    // })
+    // .catch(error => {
+    //     console.log("Error:", error);
+    // });
 
 });

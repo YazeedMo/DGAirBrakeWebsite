@@ -13,6 +13,7 @@
 
         }
 
+        // Returns all products
         public function getAllProducts() {
 
             $allProducts = array();
@@ -38,6 +39,7 @@
 
         }
 
+        // Returns a Product by the given ID
         public function getProductByID($productID) {
 
             $sql = "SELECT * FROM Products WHERE ProductID = :productId";
@@ -66,6 +68,7 @@
 
         }
 
+        // Adds the given Product to the database
         public function createProduct($product) {
 
             $sql = "INSERT INTO Products
@@ -90,6 +93,7 @@
 
         }
 
+        // Updates the given Product in the database
         public function updateProduct($product) {
 
             $sql = "UPDATE PRODUCTS
@@ -113,6 +117,7 @@
 
         }
 
+        // Removes the given product from the database
         public function deleteProduct($product) {
 
             $sql = "DELETE FROM Products
@@ -124,6 +129,51 @@
             ]);
 
         }
+
+        // Removes a Product from the database by the given ID
+        public function deleteProductByID($productId) {
+
+            $sql = "DELETE FROM Products WHERE ProductID = :productId";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            return $stmt->execute([
+                'productId' => $productId
+            ]);
+
+        }
+
+        // Returns Products with a Product Name matching the given key word
+        public function getProductsByKeyword($keyword) {
+
+            $allProducts = array();
+
+            $sql = "SELECT * FROM Products WHERE ProductName LIKE :keyword";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            
+            $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+
+            $stmt->execute();
+
+
+            while ($row = $stmt->fetch()) {
+                $product = new Product(
+                    $row['ProductName'],
+                    $row['Description'],
+                    $row['Price'],
+                    $row['QuantityAvailable'],
+                    $row['ImageURL']
+                );
+                $product->setProductID($row['ProductID']);
+
+                $allProducts[] = $product;
+
+            }
+
+            return $allProducts;
+
+        }
+
     }
 
 ?>
