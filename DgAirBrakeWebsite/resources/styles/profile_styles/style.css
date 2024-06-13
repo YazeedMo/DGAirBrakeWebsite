@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.return-to-store, #logout-btn {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease;
+}
+
+.return-to-store:hover {
+    background-color: #004ba0;
+}
+
+.content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tabs {
+    margin-bottom: 20px;
+    display: flex;
+    background-color: #f1f1f1;
+    border-bottom: 2px solid #ccc;
+}
+
+.tab-link {
+    background-color: #f1f1f1;
+    color: #333;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    flex: 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-link.active {
+    background-color: #ddd;
+    color: #0056b3;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.accordion {
+    margin-bottom: 15px;
+}
+
+.accordion-btn {
+    background-color: #f1f1f1;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-btn:hover {
+    background-color: #ddd;
+}
+
+.panel {
+    display: none;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #007bff;
+}
+
+.order {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.order-header {
+    background-color: #f1f1f1;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-details {
+    display: none;
+    padding-left: 20px;
+}
+
+.order-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.show {
+    display: block;
+}
+
+#delete-account-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+#delete-account-btn:hover {
+    background-color: #c82333;
+}
+
+#logout-btn {
+    background-color: red;
+}
+
+/* .tab-content.active {
+    display: block;
+    background-color: yellow;
+} */
