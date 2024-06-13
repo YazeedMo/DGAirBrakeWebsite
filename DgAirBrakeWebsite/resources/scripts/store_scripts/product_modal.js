@@ -35,9 +35,7 @@ async function addToCart() {
         openLoginModal();
     }
     else {
-
-        console.log(addToCartButton.productData);
-
+        
         try {
             const response = await fetch('src/main/controllers/StoreController.php?action=addProductToCart', {
                 method: 'POST',
@@ -57,21 +55,6 @@ async function addToCart() {
         catch (error) {
             console.log('Error: ', error);
         }
-
-        // const formData = new FormData;
-        // formData.append('product', addToCartButton.productData);
-        
-        // try {
-
-        //     const response = await fetch('src/main/controllers/StoreController.php?action=addProductToCart', {
-        //         method: 'POST',
-        //         body: formData
-        //     });
-
-        // }
-        // catch (error) {
-        //     console.log('Error: ', error);
-        // }
         
     }
     

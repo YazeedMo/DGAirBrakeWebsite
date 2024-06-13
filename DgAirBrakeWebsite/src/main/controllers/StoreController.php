@@ -81,7 +81,7 @@
 
             $cartService = new CartService;
 
-            $cartService->addItemToCart($customer, $product);
+            $cartService->addProductToCart($customer, $product);
 
             $response = [
                 'status' => 'success',

@@ -37,8 +37,7 @@
             else {
                 setSessionCurrentUser($user);
                 if ($user->getRole() === "Admin") {
-                    header('Location: ../../../admin_panel.php');
-                    exit();
+                    echo json_encode(['message' => 'Redirect', 'url' => 'admin_panel.php']);
                 }
                 elseif ($user->getRole() === "Customer") {
                     echo json_encode($user);

@@ -75,12 +75,7 @@
                 'cardId' => $customer->getCardID()
             ]);
 
-            if ($stmt->rowCount() > 0) {
-                return $this->getCustomerByID($this->dbConnection->lastInsertId());
-            }
-            else {
-                return false;
-            }
+            return $this->getUserByUsername($customer->getUsername());
 
         }
 

@@ -64,52 +64,14 @@ loginForm.addEventListener("submit", function(event) {
             messageLabel.style.display = 'block';
             messageLabel.textContent = 'Incorrect username or password';
         }
+        else if (data.message === 'Redirect') {
+            console.log('In correct place');
+            window.location.href = data.url;
+        }
         else {
             messageLabel.style.display = 'none';
             location.reload();
         }
     })
-
-
-    // const form = document.getElementById("login-form");
-    // const formData = new FormData(form);
-
-    // fetch("src/main/controllers/LoginController.php?action=attemptLogin", {
-    //     method: "POST",
-    //     body: formData
-    // })
-    // .then(response => {
-    //     if (response.ok) {
-    //         // Check if the response is a redirect (status code 302)
-    //         if (response.redirected) {
-
-    //             usernameTextField.value = "";
-
-    //             // Manually redirect to the location specified in the response
-    //             window.location.href = response.url;
-    //         }
-    //         else {
-    //             return response.json();
-    //         }
-    //     }
-    // })
-    // .then(data => {
-
-    //     console.log(data.message);
-    //     if (data.message == "Invalid") {
-    //         messageLabel.textContent = "Invalid Username or Password";
-    //         usernameTextField.select();
-    //     }
-    //     else {
-    //         passwordField.value = "";
-    //         modal.style.display = "none";
-    //         background.classList.remove("disable");
-    //         location.reload();
-    //     }
-    //     console.log(data);
-    // })
-    // .catch(error => {
-    //     console.log("Error:", error);
-    // });
 
 });

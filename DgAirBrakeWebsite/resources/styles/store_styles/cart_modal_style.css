@@ -1,0 +1,223 @@
+#cart-modal {
+    display: none;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cart-modal-content {
+    background-color: white;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 30%;
+}
+
+.cart-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.cart-modal-close:hover,
+.cart-modal-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Notification box */
+.cart-notification {
+    display: none;
+    color: red;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Cart items section */
+.cart-items {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+.cart-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+.cart-item-row1 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cart-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.cart-item-details p {
+    margin: 5px 0;
+    flex: 1;
+}
+
+.cart-item-row2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.cart-item-quantity button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+}
+
+.cart-item-quantity input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.cart-item-total {
+    margin: 0 10px;
+}
+
+/* Delete button */
+.cart-item-delete {
+    background-color: #ff4444; /* Red background */
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    align-self: flex-start; /* Align to the start of the flex container */
+}
+
+.cart-item-delete:hover {
+    background-color: #ff0000; /* Darker red on hover */
+}
+
+/* Total box */
+.cart-total {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Bottom section with buttons */
+.cart-bottom {
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: #f1f1f1;
+}
+
+.cart-total {
+    border: 2px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.cart-total p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.cart-total .final-total {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.cart-bottom {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #e0e0e0;
+    background-color: #f1f1f1;
+}
+
+.cart-bottom button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3 ease;
+}
+
+.cart-bottom button:hover {
+    background-color: #45a049;
+}
+
+.cart-bottom .continue-button {
+    background-color: #008CBA;
+}
+
+.cart-bottom .continue-button:hover {
+    background-color: #007bb5;
+}
+
+@media (max-width: 960px) {
+    .cart-modal-content {
+        width: 60%;
+    }
+}
+
+@media (max-width: 600px) {
+    .cart-modal-content {
+        width: 80%;
+    }
+}

@@ -1,6 +1,7 @@
 <?php
 
     require_once __DIR__ . '/../../main/model/Cart.php';
+    require_once __DIR__ . '/../../main/model/CartItem.php';
     require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class CartRepository {
@@ -127,6 +128,29 @@
                 'cartId' => $cartID
             ]);
         }
+
+        public function getCartItemByProductAndCartID($productID, $cartID) {
+
+            $sql = 'SELECT * FROM CartItems WHERE ProductID = :productId AND CartID = :cartId';
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'productId' => $productID,
+                'cartId' => $cartID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+                $cartItem = new CartItem($row['CartID'], $row['ProductID'], $row['Quantity']);
+                $cartItem->setCartItemID($row['CartItemID']);
+                return $cartItem;
+            }
+
+            return null;
+
+        }
+
     }
 
 ?>

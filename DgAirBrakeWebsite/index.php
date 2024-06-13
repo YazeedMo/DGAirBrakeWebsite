@@ -10,6 +10,9 @@
     if (getSessionCurrentUser()) {
         $user = getSessionCurrentUser();
         $username = $user->getUsername();
+        if ($user->getRole() === 'Admin') {
+            header('Location: admin_panel.php');
+        }
     }
 
 ?>
@@ -23,6 +26,7 @@
     <link rel="stylesheet" href="resources/styles/store_styles/style.css">
     <link rel="stylesheet" href="resources/styles/store_styles/product_modal_style.css">
     <link rel="stylesheet" href="resources/styles/store_styles/login_modal_style.css">
+    <link rel="stylesheet" href="resources/styles/store_styles/cart_modal_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
  
     <script src="https://kit.fontawesome.com/4b11123c7d.js" crossorigin="anonymous"></script> 
@@ -44,7 +48,7 @@
         </div>
         <div class="right-section">
             <a href="#" class="icon-link" id="search-icon" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></a>
-            <a href="#" class="icon-link" id="cart-icon"><i class="fa-solid fa-cart-shopping"></i>
+            <a href="#" class="icon-link" id="cart-icon" onclick="openCartModal()"><i class="fa-solid fa-cart-shopping"></i>
             <a href="#" class="icon-link" id="profile-icon" onclick="openLoginModal()">
                 <i class="fa-regular fa-user"></i>
                 <p><?php echo $username?></p>
@@ -69,7 +73,7 @@
                     <p class="product-price">RXX.XX</p>
                 </div>
             </div> -->
-            <div class="product-box">
+            <!-- <div class="product-box">
                 <div class="product-image-container">
                     <img class="product-image" src="resources/images/products/foot_brake_modulator.jpg">
                 </div>
@@ -137,7 +141,7 @@
                     <h2 class="product-name">Manoeuvring Modulator</h2>
                     <p class="product-price">R289.90</p>
                 </div>
-            </div>
+            </div> -->
 
         </div>    
     </div>
@@ -188,14 +192,149 @@
                     <input type="password" id="password" name="password" required><br><br>
                 </div>
                 <button type="submit">Login</button>
-                <a href="registration.html" id="register-link">Register</a>
+                <a href="registration.php" id="register-link">Register</a>
             </form>
         </div>
     </div>
 
+    <!-- The Modal Cart window -->
+     <div id="cart-modal" class="modal">
+        <div class="cart-modal-content">
+            <span class="cart-modal-close" onclick="closeCartModal()">&times;</span>
+            <h2>Your Cart</h2>
+            <div class="cart-notification" id="class-notification">
+                <p>This is a notification</p>
+            </div>
+            <div class="cart-items">
+
+                <div class="cart-item">
+
+                    <div class="cart-item-row1">
+                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <p class="cart-item-id">ID: 2</p>
+                            <p class="cart-item-name">Item Name</p>
+                            <p class="cart-item-price">Unit Price: 90</p>
+                        </div>
+                    </div>
+                    <div class="cart-item-row2">
+                        <div class="cart-item-quantity">
+                            <button class="quntity-decrease">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input">
+                            <button class="quantity-increase">+</button>
+                        </div>
+                        <p class="cart-item-total">Total: 100</p>
+                        <button class="cart-item-delete">Delete</button>
+                    </div>
+
+                </div>
+
+                <div class="cart-item">
+
+                    <div class="cart-item-row1">
+                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <p class="cart-item-id">ID: 2</p>
+                            <p class="cart-item-name">Item Name</p>
+                            <p class="cart-item-price">Unit Price: 90</p>
+                        </div>
+                    </div>
+                    <div class="cart-item-row2">
+                        <div class="cart-item-quantity">
+                            <button class="quntity-decrease">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input">
+                            <button class="quantity-increase">+</button>
+                        </div>
+                        <p class="cart-item-total">Total: 100</p>
+                        <button class="cart-item-delete">Delete</button>
+                    </div>
+
+                </div>
+
+                <div class="cart-item">
+
+                    <div class="cart-item-row1">
+                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <p class="cart-item-id">ID: 2</p>
+                            <p class="cart-item-name">Item Name</p>
+                            <p class="cart-item-price">Unit Price: 90</p>
+                        </div>
+                    </div>
+                    <div class="cart-item-row2">
+                        <div class="cart-item-quantity">
+                            <button class="quntity-decrease">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input">
+                            <button class="quantity-increase">+</button>
+                        </div>
+                        <p class="cart-item-total">Total: 100</p>
+                        <button class="cart-item-delete">Delete</button>
+                    </div>
+
+                </div>
+
+                <div class="cart-item">
+
+                    <div class="cart-item-row1">
+                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <p class="cart-item-id">ID: 2</p>
+                            <p class="cart-item-name">Item Name</p>
+                            <p class="cart-item-price">Unit Price: 90</p>
+                        </div>
+                    </div>
+                    <div class="cart-item-row2">
+                        <div class="cart-item-quantity">
+                            <button class="quntity-decrease">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input">
+                            <button class="quantity-increase">+</button>
+                        </div>
+                        <p class="cart-item-total">Total: 100</p>
+                        <button class="cart-item-delete">Delete</button>
+                    </div>
+
+                </div>
+
+                <div class="cart-item">
+
+                    <div class="cart-item-row1">
+                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <p class="cart-item-id">ID: 2</p>
+                            <p class="cart-item-name">Item Name</p>
+                            <p class="cart-item-price">Unit Price: 90</p>
+                        </div>
+                    </div>
+                    <div class="cart-item-row2">
+                        <div class="cart-item-quantity">
+                            <button class="quntity-decrease">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input">
+                            <button class="quantity-increase">+</button>
+                        </div>
+                        <p class="cart-item-total">Total: 100</p>
+                        <button class="cart-item-delete">Delete</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="cart-total">
+
+                <p class="final-total">Final Total: 2323</p>
+
+            </div>
+            <div class="cart-bottom">
+                <button class="checkout-button">Proceed to Checkout</button>
+                <button class="continue-button">Continue Shopping</button>
+            </div>
+        </div>
+     </div>
+
     <script src="resources/scripts/store_scripts/store.js"></script>
     <script src="resources/scripts/store_scripts/product_modal.js"></script>
     <script src="resources/scripts/store_scripts/login_modal.js"></script>
+    <script src="resources/scripts/store_scripts/cart_modal.js"></script>
 
 </body>
 </html>

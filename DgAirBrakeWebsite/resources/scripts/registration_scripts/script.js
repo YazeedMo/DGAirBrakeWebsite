@@ -1,9 +1,9 @@
 function testData() {
 
-    document.getElementById("username").value = "testerer";
+    document.getElementById("username").value = "tester";
     document.getElementById("email").value = "tester@gmail.com";
-    document.getElementById("password").value = "tester";
-    document.getElementById("confirm-password").value = "tester";
+    document.getElementById("password").value = "testing";
+    document.getElementById("confirm-password").value = "testing";
     document.getElementById("address-string").value = "qweqweqwe";
     document.getElementById("area-code").value = "7798";
     document.getElementById("card-number").value = "123123123123123123";

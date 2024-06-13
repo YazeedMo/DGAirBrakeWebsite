@@ -86,7 +86,7 @@
 
         public function updateCartItem($cartItem) {
 
-            $sql = "UPDATE Carts set
+            $sql = "UPDATE CartItems set
                     CartID = :cartId,
                     ProductID = :productId,
                     Quantity = :quantity
@@ -96,7 +96,8 @@
             return $stmt->execute([
                 'cartId' => $cartItem->getCartID(),
                 'productId' => $cartItem->getProductID(),
-                'quantity' => $cartItem->getQuantity()
+                'quantity' => $cartItem->getQuantity(),
+                'cartItemId' => $cartItem->getCartItemID()
             ]);
 
         }

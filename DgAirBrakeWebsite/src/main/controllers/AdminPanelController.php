@@ -2,7 +2,7 @@
 
     require_once __DIR__ . '/../../main/model/Admin.php';
     require_once __DIR__ . '/../../main/util/Session.php';
-    require_once __DIR__ . '/../../main/services/ProductServiceNew.php';
+    require_once __DIR__ . '/../../main/services/ProductService.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
 

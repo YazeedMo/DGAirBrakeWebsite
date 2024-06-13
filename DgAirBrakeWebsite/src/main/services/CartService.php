@@ -18,23 +18,25 @@
         }
 
 
-        public function addItemToCart($customer, $item) {
+        public function addProductToCart($customer, $product) {
 
             $customerCart = $this->getCustomerCart($customer);
 
-            if (!$customerCart) {
-                $customerCart = $this->createCustomerCart($customer);
-            }
-            else {
+            $cartItem = $this->cartRepo->getCartItemByProductAndCartID($product->getProductID(), $customerCart->getCartID());
 
+            if ($cartItem === null) {
                 $cartItem = new CartItem(
                     $customerCart->getCartID(),
-                    $item->getProductID(),
+                    $product->getProductID(),
                     1);
-            
+                
                 $this->cartItemRepo->createCartItem($cartItem);
-
             }
+            else {
+                $cartItem->setQuantity($cartItem->getQuantity() + 1);
+                $this->cartItemRepo->updateCartItem($cartItem);
+            }
+
         }
 
         public function getCustomerCart($customer) {
