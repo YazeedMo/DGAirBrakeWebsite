@@ -10,29 +10,9 @@ const fileInput = document.getElementById('image');
 const addProductBtn = document.getElementById('add-product-btn');
 const editProductBtn = document.getElementById('edit-product-btn');
 const deleteProductBtn = document.getElementById('delete-product-btn');
-var productIdInEdit = null;
+var productInEdit = null;
 
-function addProduct() {
-
-    manage_product_modal.style.display = "block";
-    modalHeading.textContent = "Add New Product";
-    notificationLabel.style.display = 'none';
-
-    priceField.value = 0;
-    quantityAvailableField.value = 0;
-
-    editProductBtn.style.display = 'none';
-    deleteProductBtn.style.display = 'none';
-
-
-    closeBtn.onclick = function() {
-        manage_product_modal.style.display = "none";
-        location.reload();
-    }
-
-}
-
-function editProduct(productId) {
+function editProduct(product) {
 
     productIdInEdit = productId;
 
@@ -52,7 +32,7 @@ function editProduct(productId) {
 
 }
 
-function deleteProduct(productId) {
+function deleteProduct(product) {
 
     productIdInEdit = productId;
 
@@ -103,6 +83,33 @@ async function displayProductData() {
 }
 
 async function submitForm(event) {
+
+    // Edit Product
+    if (editProductBtn.style.display !== 'none') {
+
+        const inputsArray = [
+            productNameField, descriptionField, priceField, quantityAvailableField
+        ];
+
+        var allFieldsValid = true;
+        for (i = 0; i < inputsArray.length; i++) {
+            const validInput = validateInput(inputsArray[i].id);
+            if (validInput === false) {
+                allFieldsValid = false;
+                break
+            }
+        }
+
+        if (allFieldsValid) {
+            // Send form
+        }
+
+    }
+    // Delete Product
+    else if (deleteProductBtn.style.display !== 'none') {
+        
+    }
+
 
     event.preventDefault();
 
@@ -230,6 +237,7 @@ function displayNotification(message) {
     notificationLabel.style.display = 'block';
 
 }
+
 
 async function sendForm() {
 

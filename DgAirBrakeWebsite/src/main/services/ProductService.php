@@ -32,6 +32,12 @@
 
         }
 
+        public function updateProduct($product) {
+
+            $this->productRepo->updateProduct($product);
+
+        }
+
         public function deleteProductByID($productID) {
 
             $this->productRepo->deleteProductByID($productID);

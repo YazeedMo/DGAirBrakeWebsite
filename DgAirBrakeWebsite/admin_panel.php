@@ -4,6 +4,7 @@
     require_once __DIR__ . '/src/main/model/User.php';
     require_once __DIR__ . '/src/main/model/Admin.php';
     require_once __DIR__ . '/src/main/model/Customer.php';
+    require_once __DIR__ . '/src/main/model/Product.php';
 
     $currentUser = false;
     $username = "Login";
@@ -83,7 +84,7 @@
 
 </body>
 
-<!-- Add Product Modal -->
+<!-- Manage Product Modal -->
 <div class="modal" id="manage-product-modal" style="display: none;">
 
     <div class="modal-content">
@@ -123,7 +124,6 @@
 </div>
 
 <script src="resources/scripts/admin_panel_scripts/script.js"></script>
-<script src="resources/scripts/admin_panel_scripts/manage_products
-.js"></script>
+<script src="resources/scripts/admin_panel_scripts/manage_products_new.js"></script>
 
 </html>

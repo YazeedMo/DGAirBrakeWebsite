@@ -3,6 +3,7 @@
     require_once __DIR__ . '/../../main/model/Admin.php';
     require_once __DIR__ . '/../../main/util/Session.php';
     require_once __DIR__ . '/../../main/services/ProductService.php';
+    require_once __DIR__ . '/../../main/model/Product.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
 
@@ -32,6 +33,9 @@
         switch ($action) {
             case 'addProduct':
                 addProduct();
+                break;
+            case 'editProduct':
+                editProduct();
                 break;
         }
 
@@ -86,8 +90,45 @@
 
             echo json_encode(['message' => 'sucess']);
         }
+    }
 
+    function editProduct() {
 
+        $productService = new ProductService;
+
+        $productToUpdate = $productService->getProductByID($_POST['productId']);
+
+        // New image update
+        if (isset($_POST['fileExist']) && $_POST['fileExist'] !== 'false') {
+
+            $newFile = $_FILES['fileToUpload'];
+
+            // Store image
+            if (!storeImage($newFile)) {
+                echo json_encode(['message' => 'failed']);
+                return;
+            }
+
+            $productToUpdate->setImageURL($newFile['name']);
+        }
+        // No new image
+        else {
+
+            $originalImageURL = $productToUpdate->getImageURL();
+            $fileName = basename($originalImageURL);
+
+            $productToUpdate->setImageURL($fileName);
+        
+        }
+
+        $productToUpdate->setProductName($_POST['productName']);
+        $productToUpdate->setDescription($_POST['description']);
+        $productToUpdate->setPrice($_POST['price']);
+        $productToUpdate->setQuantityAvailable($_POST['quantityAvailable']);
+
+        $productService->updateProduct($productToUpdate);
+
+        echo json_encode(['message' => 'success']);
 
     }
 
@@ -123,24 +164,5 @@
         echo json_encode(['message' => 'success']);
 
     }
-
-    // $targetDir = "uploads/";
-
-    // $fileName = basename($_FILES['fileToUpload']['name']);
-
-    // $targetFile = $targetDir . $fileName;
-
-    // if (!is_dir($targetDir)) {
-    //     mkdir($targetDir, 0755, true);
-    // }
-
-    // if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
-    //     echo "The file " . $fileName . " has been uploaded";
-    // }
-    // else {
-    //     echo "Sorry, there was an error uploading your file";
-    // }
-
-
 
 ?>

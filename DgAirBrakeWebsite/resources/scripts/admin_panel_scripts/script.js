@@ -30,6 +30,7 @@ async function getAllProducts() {
         console.log(data);
 
         const tableBody = document.querySelector('.product-table tbody');
+        tableBody.innerHTML = '';  // Clear the table before adding new rows
 
         for (let i = 0; i < data.length; i++) {
             const product = data[i];
