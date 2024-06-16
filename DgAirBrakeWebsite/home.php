@@ -29,7 +29,7 @@
             <li><a href="#services" onclick="hideUl()"> Services</a></li>
             <li><a href="#gallery" onclick="hideUl()"> Gallery</a></li>
             <li><a href="#contact" onclick="hideUl()"> Contact Us</a></li>
-            <li><a href="#reviews" onclick="hideUl()">Reviews</a></li>
+            <li><a href="index.php" onclick="hideUl()">Store</a></li>
         </ul>
     </nav>
 
@@ -129,7 +129,7 @@
         </div>
     </section>
 
-    <section id="reviews">
+    <!-- <section id="reviews">
         <div class="section-header">CUSTOMER REVIEWS</div>
         <div class="section-content">
             <div class="review">
@@ -151,7 +151,7 @@
                 <p class="review-text">"Fusce hendrerit nec justo nec dictum. Proin ac tellus sed libero accumsan feugiat. Ut nec luctus elit. Curabitur feugiat risus non tortor accumsan, vel convallis ligula porttitor."</p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <footer>
         <div class="footer-content">

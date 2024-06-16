@@ -53,6 +53,23 @@
 
         }
 
+        public function getDetailedCartItemsByCustomerID($customer) {
+
+            return $this->cartRepo->getDetailedCartItemsByCustomerID($customer->getCustomerID());
+
+        }
+
+        public function updateCartItemQuantity($cartItemID, $quantity) {
+
+            return $this->cartItemRepo->updateCartItemQuantity($cartItemID, $quantity);
+
+        }
+
+        public function deleteCartItem($cartItemID) {
+
+            return $this->cartItemRepo->deleteCartItem($cartItemID);
+        }
+
     }
 
 ?>

@@ -47,6 +47,7 @@ async function addToCart() {
             if (response.ok) {
                 const result = await response.json();
                 console.log(result);
+                location.reload();
             }
             else {
                 console.error('Failed to add product to cart: ', response.statusText);

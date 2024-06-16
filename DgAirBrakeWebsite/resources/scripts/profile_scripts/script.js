@@ -1,12 +1,24 @@
+const usernameLabel = document.getElementById('username');
+const emailLabel = document.getElementById('email');
+const addressLabel = document.getElementById('address');
+const areaCodeLabel = document.getElementById('area-code');
+const cardNumberLabel = document.getElementById('card-number');
+const cardExpirationDateLabel = document.getElementById('expiration-date');
+const cardTypeLabel = document.getElementById('card-type');
+
+const ordersContainer = document.getElementById('Shopping');
+
 initialize();
+setProfileData();
+displayOrders();
 
 function initialize() {
 
-    const profileTabLink = document.getElementById("profile-tab-link");
-    const profileTabContent = document.getElementById("Profile");
+    const activeTabLink = document.getElementById("shopping-tab-link");
+    const activeTabContent = document.getElementById("Shopping");
 
-    profileTabLink.classList.add("active");
-    profileTabContent.style.display = 'block';
+    activeTabLink.classList.add("active");
+    activeTabContent.style.display = 'block';
 
 }
 
@@ -62,4 +74,103 @@ async function logout() {
         console.log(error);
     }
 
+}
+
+async function setProfileData() {
+
+    try {
+        const response = await fetch('src/main/controllers/ProfileController.php?action=getCustomerDetails');
+        if (!response.ok) {
+            throw new Error('Error fetching data');
+        }
+        const data = await response.json();
+
+        usernameLabel.textContent = data.customerUsername;
+        emailLabel.textContent = data.customerEmail;
+        addressLabel.textContent = data.addressString;
+        areaCodeLabel.textContent = data.areaCode;
+        cardNumberLabel.textContent = maskCardNumber(data.cardNumber);
+        cardExpirationDateLabel.textContent = data.cardExpirationDate;
+        cardTypeLabel.textContent = data.cardType;
+
+
+    }
+    catch (error) {
+        console.error('There was a problem with fetch operation: ', error);
+    }
+
+}
+
+function maskCardNumber(cardNumber) {
+    // Ensure cardNumber is a string
+    const cardNumberStr = cardNumber.toString();
+    
+    // Get the last 4 digits
+    const last4Digits = cardNumberStr.slice(-4);
+    
+    // Calculate the number of asterisks needed
+    const asterisks = '*'.repeat(cardNumberStr.length - 4);
+    
+    // Concatenate the asterisks with the last 4 digits
+    return asterisks + last4Digits;
+}
+
+async function getShoppingInformation() {
+
+    try {
+        const response = await fetch('src/main/controllers/ProfileController.php?action=getOrders');
+        if (!response.ok) {
+            throw new Error('Error fetching data');
+        }
+        const data = await response.json();
+        return data;
+
+    }
+    catch (error) {
+        console.error('There was a problem with the fetch operation: ', error);
+    }
+
+}
+
+
+async function displayOrders() {
+
+    const allOrders = await getShoppingInformation();
+
+    allOrders.forEach(order => {
+
+        console.log(order);
+
+        const orderObject = document.createElement('div');
+        orderObject.classList.add('order');
+
+        // Create the order header div
+        const orderHeader = document.createElement('div');
+        orderHeader.classList.add('order-header');
+
+        // Create the individual elements
+        const orderIdP = document.createElement('p');
+        orderIdP.innerHTML = `<strong>Order ID:</strong> <span>${order.orderID}</span>`;
+
+        const orderDateP = document.createElement('p');
+        orderDateP.innerHTML = `<strong>Order Date:</strong> <span>${order.orderDate}</span>`;
+
+        const totalAmountP = document.createElement('p');
+        totalAmountP.innerHTML = `<strong>Total Amount:</strong> <span>${order.totalAmount}</span>`;
+
+        const orderStatusP = document.createElement('p');
+        orderStatusP.innerHTML = `<strong>Order Status:</strong> <span>${order.orderStatus}</span>`;
+
+        // Append the elements to the order header
+        orderHeader.appendChild(orderIdP);
+        orderHeader.appendChild(orderDateP);
+        orderHeader.appendChild(totalAmountP);
+        orderHeader.appendChild(orderStatusP);
+        orderObject.appendChild(orderHeader);
+
+        // Append the order header to the orders container
+        ordersContainer.appendChild(orderObject);
+
+    });
+    
 }

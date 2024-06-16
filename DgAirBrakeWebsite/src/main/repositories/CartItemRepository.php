@@ -102,15 +102,29 @@
 
         }
 
+        public function updateCartItemQuantity($cartItemID, $quantity) {
+
+            $sql = "UPDATE CartItems SET
+                    Quantity = :quantity
+                    WHERE CartItemID = :cartItemId";
+            
+            $stmt = $this->dbConnection->prepare($sql);
+            return $stmt->execute([
+                'quantity' => $quantity,
+                'cartItemId' => $cartItemID
+            ]);
+
+        }
+
         public function deleteCartItem($cartItemID) {
 
             $sql = "DELETE FROM CartItems
                     WHERE
-                    CartID = :cartId";
+                    CartItemID = :cartItemId";
 
             $stmt = $this->dbConnection->prepare($sql);
             return $stmt->execute([
-                'cartId' => $cartItemID
+                'cartItemId' => $cartItemID
             ]);
 
         }

@@ -165,9 +165,8 @@ async function sendForm() {
         });
 
         const result = await response.json();
-        console.log(result.message === 'success'); {
-            location.reload();
-        }
+        console.log(result.message === 'success'); 
+        location.reload();
 
     }
     catch (error) {

@@ -42,7 +42,7 @@
 
             $stmt = $this->dbConnection->prepare($sql);
             $stmt->execute([
-                'customerId'
+                'customerId' => $customerID
             ]);
 
             $row = $stmt->fetch();

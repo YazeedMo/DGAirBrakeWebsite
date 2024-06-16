@@ -3,6 +3,8 @@
     require_once __DIR__ . '/../../main/model/User.php';
     require_once __DIR__ . '/../../main/model/Admin.php';
     require_once __DIR__ . '/../../main/model/Customer.php';
+    require_once __DIR__ . '/../../main/repositories/AddressRepository.php';
+    require_once __DIR__ . '/../../main/repositories/CardRepository.php';
     require_once __DIR__ .  '/../../main/config/DatabaseConnection.php';
 
     abstract class UserRepository {

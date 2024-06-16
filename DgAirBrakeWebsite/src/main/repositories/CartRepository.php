@@ -2,6 +2,7 @@
 
     require_once __DIR__ . '/../../main/model/Cart.php';
     require_once __DIR__ . '/../../main/model/CartItem.php';
+    require_once __DIR__ . '/../../main/model/Product.php';
     require_once __DIR__ . '/../../main/config/DatabaseConnection.php';
 
     class CartRepository {
@@ -148,6 +149,48 @@
             }
 
             return null;
+
+        }
+
+        // Get all Product details from User cart
+        public function getDetailedCartItemsByCustomerID($customerID) {
+
+            $allCartItems = array();
+
+            $sql = 'SELECT * FROM CustomerCartView WHERE CustomerID = :customerId';
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'customerId' => $customerID
+            ]);
+
+            while ($row = $stmt->fetch()) {
+
+                $cartItemID = $row['CartItemID'];
+
+                $product = new Product(
+                    $row['ProductName'],
+                    $row['Description'],
+                    $row['Price'],
+                    $row['QuantityAvailable'],
+                    $row['ImageURL']);
+                $product->setProductID($row['ProductID']);
+
+                $quantity = $row['Quantity'];
+
+                $totalPrice = $row['TotalPrice'];
+
+                $detailedCartItem = new stdClass();
+                $detailedCartItem->cartItemID = $cartItemID;
+                $detailedCartItem->product = $product;
+                $detailedCartItem->quantity = $quantity;
+                $detailedCartItem->totalPrice = $totalPrice;
+
+                $allCartItems[] = $detailedCartItem;
+
+            }
+
+            return $allCartItems;
 
         }
 

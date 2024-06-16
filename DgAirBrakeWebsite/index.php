@@ -73,75 +73,6 @@
                     <p class="product-price">RXX.XX</p>
                 </div>
             </div> -->
-            <!-- <div class="product-box">
-                <div class="product-image-container">
-                    <img class="product-image" src="resources/images/products/foot_brake_modulator.jpg">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Foot Brake Modulator</h2>
-                    <p class="product-price">R399.99</p>
-                </div>
-            </div>
-
-            <div class="product-box">
-                <div class="product-image-container">
-                    <img class="product-image" src="resources/images/products/gear_knob.jpg">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Gear Knob</h2>
-                    <p class="product-price">R209.99</p>
-                </div>
-            </div>
-
-            <div class="product-box">
-                <div class="product-image-container">
-                    <img class="product-image" src="resources/images/products/green_light.jpg">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Green Light</h2>
-                    <p class="product-price">R80</p>
-                </div>
-            </div>
-
-            <div class="product-box">
-                <div class="product-image-container">
-                    <img class="product-image" src="resources/images/products/hand_brake_modulator.jpg">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Hand Brake Modulator</h2>
-                    <p class="product-price">180</p>
-                </div>
-            </div>
-
-            <div class="product-box">
-                <div class="product-image-container">
-                    <img class="product-image" src="resources/images/products/hand_brake_valve.jpg">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Hand Brake Valve</h2>
-                    <p class="product-price">R219.99</p>
-                </div>
-            </div>
-
-            <div class="product-box">
-                <div class="product-image-container">
-                    <img class="product-image" src="resources/images/products/horn.jpg">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Horn</h2>
-                    <p class="product-price">R150</p>
-                </div>
-            </div>
-
-            <div class="product-box">
-                <div class="product-image-container">
-                    <img class="product-image" src="resources/images/products/manoeuvring_modulator.jpg">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Manoeuvring Modulator</h2>
-                    <p class="product-price">R289.90</p>
-                </div>
-            </div> -->
 
         </div>    
     </div>
@@ -207,7 +138,7 @@
             </div>
             <div class="cart-items">
 
-                <div class="cart-item">
+                <!-- <div class="cart-item">
 
                     <div class="cart-item-row1">
                         <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
@@ -219,7 +150,7 @@
                     </div>
                     <div class="cart-item-row2">
                         <div class="cart-item-quantity">
-                            <button class="quntity-decrease">-</button>
+                            <button class="quantity-decrease">-</button>
                             <input type="number" value="1" min="1" class="quantity-input">
                             <button class="quantity-increase">+</button>
                         </div>
@@ -227,96 +158,7 @@
                         <button class="cart-item-delete">Delete</button>
                     </div>
 
-                </div>
-
-                <div class="cart-item">
-
-                    <div class="cart-item-row1">
-                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <p class="cart-item-id">ID: 2</p>
-                            <p class="cart-item-name">Item Name</p>
-                            <p class="cart-item-price">Unit Price: 90</p>
-                        </div>
-                    </div>
-                    <div class="cart-item-row2">
-                        <div class="cart-item-quantity">
-                            <button class="quntity-decrease">-</button>
-                            <input type="number" value="1" min="1" class="quantity-input">
-                            <button class="quantity-increase">+</button>
-                        </div>
-                        <p class="cart-item-total">Total: 100</p>
-                        <button class="cart-item-delete">Delete</button>
-                    </div>
-
-                </div>
-
-                <div class="cart-item">
-
-                    <div class="cart-item-row1">
-                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <p class="cart-item-id">ID: 2</p>
-                            <p class="cart-item-name">Item Name</p>
-                            <p class="cart-item-price">Unit Price: 90</p>
-                        </div>
-                    </div>
-                    <div class="cart-item-row2">
-                        <div class="cart-item-quantity">
-                            <button class="quntity-decrease">-</button>
-                            <input type="number" value="1" min="1" class="quantity-input">
-                            <button class="quantity-increase">+</button>
-                        </div>
-                        <p class="cart-item-total">Total: 100</p>
-                        <button class="cart-item-delete">Delete</button>
-                    </div>
-
-                </div>
-
-                <div class="cart-item">
-
-                    <div class="cart-item-row1">
-                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <p class="cart-item-id">ID: 2</p>
-                            <p class="cart-item-name">Item Name</p>
-                            <p class="cart-item-price">Unit Price: 90</p>
-                        </div>
-                    </div>
-                    <div class="cart-item-row2">
-                        <div class="cart-item-quantity">
-                            <button class="quntity-decrease">-</button>
-                            <input type="number" value="1" min="1" class="quantity-input">
-                            <button class="quantity-increase">+</button>
-                        </div>
-                        <p class="cart-item-total">Total: 100</p>
-                        <button class="cart-item-delete">Delete</button>
-                    </div>
-
-                </div>
-
-                <div class="cart-item">
-
-                    <div class="cart-item-row1">
-                        <img src="resources/images/products/bracket_for_replacement.jpg" alt="Item Image" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <p class="cart-item-id">ID: 2</p>
-                            <p class="cart-item-name">Item Name</p>
-                            <p class="cart-item-price">Unit Price: 90</p>
-                        </div>
-                    </div>
-                    <div class="cart-item-row2">
-                        <div class="cart-item-quantity">
-                            <button class="quntity-decrease">-</button>
-                            <input type="number" value="1" min="1" class="quantity-input">
-                            <button class="quantity-increase">+</button>
-                        </div>
-                        <p class="cart-item-total">Total: 100</p>
-                        <button class="cart-item-delete">Delete</button>
-                    </div>
-
-                </div>
-
+                </div> -->
 
             </div>
             <div class="cart-total">
@@ -325,8 +167,8 @@
 
             </div>
             <div class="cart-bottom">
-                <button class="checkout-button">Proceed to Checkout</button>
-                <button class="continue-button">Continue Shopping</button>
+                <button class="checkout-button" onclick="checkout()">Proceed to Checkout</button>
+                <button class="continue-button" onclick="continueShopping()">Continue Shopping</button>
             </div>
         </div>
      </div>

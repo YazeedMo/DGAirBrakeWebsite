@@ -115,6 +115,46 @@
 
         }
 
+        public function makeOrder($customerID) {
+
+            $sql = "CALL Checkout(:customerId)";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            return $stmt->execute([
+                'customerId' => $customerID
+            ]);
+
+        }
+
+        public function getAllCustomerOrders($customerID) {
+
+            $allOrders = array();
+        
+            $sql = "SELECT * FROM Orders WHERE CustomerID = :customerId";
+        
+            $stmt = $this->dbConnection->prepare($sql);
+            
+            if ($stmt->execute(['customerId' => $customerID])) {
+                while ($row = $stmt->fetch()) {
+                    $order = new Order(
+                        $row['CustomerID'],
+                        $row['OrderDate'],
+                        $row['TotalAmount'],
+                        $row['OrderStatus']
+                    );
+                    $order->setOrderID($row['OrderID']);
+        
+                    $allOrders[] = $order;
+                }
+            } else {
+                // Handle query failure
+                throw new Exception("Database query error");
+            }
+        
+            return $allOrders;
+        }
+        
+
     }
 
 

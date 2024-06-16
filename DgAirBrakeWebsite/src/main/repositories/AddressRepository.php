@@ -106,6 +106,23 @@
 
         }
 
+        public function getAddressByCustomerID($customerID) {
+
+            $sql = "SELECT AddressID FROM CustomerAddresses WHERE CustomerID = :customerId";
+
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([
+                'customerId' => $customerID
+            ]);
+
+            $row = $stmt->fetch();
+
+            if ($row) {
+                return $this->getAddressByID($row['AddressID']);
+            }
+
+        }
+
     }
 
 ?>

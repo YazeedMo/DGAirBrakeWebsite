@@ -8,6 +8,9 @@
     if (!getSessionCurrentUser()) {
         header('Location: index.php');
     }
+    else (
+        $user = getSessionCurrentUser()
+    )
 
 ?>
 
@@ -23,7 +26,7 @@
 <body>
 
     <header>
-        <h1>Username</h1>
+        <h1>Hello, <?php echo $user->getUsername()?></h1>
         <a href="index.php" class="return-to-store">Return to Store</a>
 
     </header>
@@ -45,7 +48,7 @@
                     <div class="panel">
                         <p><strong>Username:</strong> <span id="username">Username</span></p>
                         <p><strong>Email:</strong> <span id="email">email@example.com</span></p>
-                        <button onclick="changePassword()">Change Password</button>
+                        <!-- <button onclick="changePassword()">Change Password</button> -->
                     </div>
                 </div>
             </div>
@@ -78,7 +81,7 @@
         <div id="Shopping" class="tab-content">
         
             <!-- Example Order 1 -->
-            <div class="order">
+            <!-- <div class="order">
                 <div class="order-header">
                     <p><strong>Order ID:</strong> <span>12345</span></p>
                     <p><strong>Order Date:</strong> <span>June 10, 2024</span></p>
@@ -87,7 +90,7 @@
                 </div>
                 <button class="accordion-btn" onclick="toggleAccordion(event)">Expand</button>
                 <div class="order-details">
-                    <!-- Sample Item Details for Order 1 -->
+                    Sample Item Details for Order 1
                     <div class="order-item">
                         <p><strong>Product Name:</strong> Truck Engine</p>
                         <p><strong>Quantity:</strong> 1</p>
@@ -99,11 +102,11 @@
                         <p><strong>Final Price:</strong> $50.00</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
             <!-- Example Order 2 -->
-            <div class="order">
+            <!-- <div class="order">
                 <div class="order-header">
                     <p><strong>Order ID:</strong> <span>54321</span></p>
                     <p><strong>Order Date:</strong> <span>June 5, 2024</span></p>
@@ -112,7 +115,7 @@
                 </div>
                 <button class="accordion-btn" onclick="toggleAccordion(event)">Expand</button>
                 <div class="order-details">
-                    <!-- Sample Item Details for Order 2 -->
+                    Sample Item Details for Order 2
                     <div class="order-item">
                         <p><strong>Product Name:</strong> Headlights</p>
                         <p><strong>Quantity:</strong> 1</p>
@@ -124,7 +127,7 @@
                         <p><strong>Final Price:</strong> $50.00</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
